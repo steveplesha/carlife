@@ -25,10 +25,7 @@
         <!-- Add your site or application content here -->
         <div ng-controller="CarController as car">
             <div ng-repeat="vehicle in car.cars"> 
-                <p>{{ vehicle.name }}</p>
-                <p>{{ 4 + 6 }}</p>
                 <div ng-include="'car-info.html'"></div>
-                <div>Test</div>
             </div>
         </div>        
         

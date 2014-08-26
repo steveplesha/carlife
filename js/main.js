@@ -8,9 +8,14 @@
         };
     });
 */    
-    app.controller('CarController', function(){
+    app.controller('CarController', ['$http', function($http){
         this.cars = vehicle;
-    });
+        /*var motor= this;
+        motor.cars = [];
+        $http.get('/car.json').success(function(data){
+            motor.cars = data;
+        }); */
+    }]);
     
     var vehicle = [
         {
