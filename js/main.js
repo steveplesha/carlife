@@ -1,6 +1,13 @@
 (function() {
     var app = angular.module('myApp', []);
     
+/*    app.directive('vehicleInfo', function(){
+        return {
+            restrict: 'E',
+            templateUrl: 'car-info.html'
+        };
+    });
+*/    
     app.controller('CarController', function(){
         this.cars = vehicle;
     });
