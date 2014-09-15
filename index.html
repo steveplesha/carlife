@@ -23,11 +23,16 @@
         <![endif]-->
 
         <!-- Add your site or application content here -->
-        <div ng-controller="CarController as car">
-            <div ng-repeat="vehicle in car.cars"> 
-                <div ng-include="'car-info.html'"></div>
-            </div>
-        </div>        
+        <div class="container">
+            <header ng-include src="'header.html'" ></header>
+            <div ng-controller="CarController as car">
+                <div class="row">
+                    <div class="car-item col col-md-4" ng-repeat="vehicle in car.cars"> 
+                        <div ng-include="'car-info.html'"></div>
+                    </div>
+                </div>
+            </div> 
+        </div>    
         
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
