@@ -20,12 +20,12 @@
     var vehicle = [
         {
             name: 'Corolla',
-            type: "sedan",
+            type: "Sedan",
             mileage: 90000
         },
         {
             name: "Grand Caravan",
-            type: "van",
+            type: "Van",
             mileage: 40000
         }];
 })();
