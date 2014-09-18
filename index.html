@@ -23,8 +23,9 @@
         <![endif]-->
 
         <!-- Add your site or application content here -->
-        <div class="container">
-            <header ng-include src="'header.html'" ></header>
+        
+        <header ng-include src="'app/partials/header.html'" ></header>
+        <main class="container">
             <div ng-controller="CarController as car">
                 <div class="row">
                     <div class="car-item col col-md-4" ng-repeat="vehicle in car.cars"> 
@@ -32,7 +33,8 @@
                     </div>
                 </div>
             </div> 
-        </div>    
+        </main>
+        <footer ng-include src="'app/partials/footer.html'" ></footer>
         
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
