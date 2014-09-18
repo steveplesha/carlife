@@ -104,6 +104,9 @@ body { padding: 15px 0 0 15px; }
     padding: 20px;
 }
 
+.car-image {
+    max-width: 100%;
+}
 
 
 
