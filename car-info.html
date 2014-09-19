@@ -1,10 +1,14 @@
-<h1>{{ vehicle.name }}</h1>
-<div class="col-xs-12 col-sm-4 col-md-6 col-xl-6"><img class="car-image" ng-src="{{ vehicle.picture }}"/></div>
-<p>{{ vehicle.type }}</p>
-<p>{{ vehicle.mileage | number }} miles</p>
-<h2>Work done</h2>
-<div ng-repeat="repair in vehicle.repairs">
-    <p>Job: {{ repair.workDone }}</p>
-    <p>Cost: {{ repair.cost }}</p>
-    <p>Shop: {{ repair.shop }}</p>
+<div class="row">
+    <div class="car-item col col-md-4" ng-repeat="vehicle in car.cars"> 
+        <h1>{{ vehicle.name }}</h1>
+        <div class="col-xs-12 col-sm-4 col-md-6 col-xl-6"><img class="car-image" ng-src="{{ vehicle.picture }}"/></div>
+        <p>{{ vehicle.type }}</p>
+        <p>{{ vehicle.mileage | number }} miles</p>
+        <h2>Work done</h2>
+        <div ng-repeat="repair in vehicle.repairs">
+            <p>Job: {{ repair.workDone }}</p>
+            <p>Cost: {{ repair.cost }}</p>
+            <p>Shop: {{ repair.shop }}</p>
+        </div>
+    </div>
 </div>

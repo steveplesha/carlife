@@ -97,7 +97,7 @@ textarea {
    Author's custom styles
    ========================================================================== */
 
-body { padding: 15px 0 0 15px; }
+main { padding: 15px 0 0 15px; }
 
 .car-item {
     border: 1px solid rgb( 0, 0, 0 );

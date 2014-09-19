@@ -26,13 +26,7 @@
         
         <header ng-include src="'app/partials/header.html'" ></header>
         <main class="container">
-            <div ng-controller="CarController as car">
-                <div class="row">
-                    <div class="car-item col col-md-4" ng-repeat="vehicle in car.cars"> 
-                        <div ng-include="'car-info.html'"></div>
-                    </div>
-                </div>
-            </div> 
+            <car-list></car-list>
         </main>
         <footer ng-include src="'app/partials/footer.html'" ></footer>
         

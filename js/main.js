@@ -1,20 +1,19 @@
 (function() {
     var app = angular.module('myApp', []);
     
-/*    app.directive('vehicleInfo', function(){
+    app.directive('carList', [ '$http', function($http) {
         return {
             restrict: 'E',
-            templateUrl: 'car-info.html'
+            templateUrl: 'car-info.html',
+            controller: function(){
+                var inventory = this;
+                inventory.cars = [];
+                $http.get('car.json').success(function(data){
+                    inventory.cars = data;
+                });
+            },
+            controllerAs: 'car'
         };
-    });
-*/    
-    app.controller('CarController', ['$http', function($http){
-        this.cars = vehicle;
-        /*var motor= this;
-        motor.cars = [];
-        $http.get('/car.json').success(function(data){
-            motor.cars = data;
-        }); */
     }]);
     
     var vehicle = [
