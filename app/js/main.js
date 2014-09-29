@@ -1,5 +1,6 @@
 (function() {
     var app = angular.module('myApp', []);
+    var myDataRef = new Firebase('https://burning-heat-392.firebaseio.com');
     
     app.directive('carList', [ '$http', function($http) {
         return {
