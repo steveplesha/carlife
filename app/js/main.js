@@ -1,12 +1,27 @@
 (function() {
-    var app = angular.module('myApp', []);
+    var app = angular.module('myApp', ['firebase']);
     var myDataRef = new Firebase('https://burning-heat-392.firebaseio.com');
-        
+    var carRef = myDataRef.child('vehicles');
+    
+
+    
     app.controller("CarController", function() {
         this.cars = vehicle;
     });
-    
-    var carRef = myDataRef.child('vehicles');
+
+    $('#jsAddNewCar').onclick(function(){
+        var makeModel = $('#vehicleInput').val();
+        var type = $('#vehicleTypeInput').val();
+        var mileage = $('#mileageInput').val();
+        
+        carRef.push({
+            name: "Sierra",
+            type: "Pickup",
+            mileage: 43000
+        });
+    });
+    /*    
+
     carRef.push({
         name: 'Corolla',
             type: "Sedan",
@@ -20,7 +35,7 @@
                 }
             ]
         });
-    
+  */  
     var vehicle = [
         {
             name: 'Corolla',
