@@ -5,21 +5,26 @@
     
 
     
-    app.controller("CarController", function() {
+    app.controller("CarController", ["$scope", function($scope) {
         this.cars = vehicle;
-    });
-
-    $('#jsAddNewCar').onclick(function(){
-        var makeModel = $('#vehicleInput').val();
-        var type = $('#vehicleTypeInput').val();
-        var mileage = $('#mileageInput').val();
         
-        carRef.push({
-            name: "Sierra",
-            type: "Pickup",
-            mileage: 43000
-        });
-    });
+        $scope.addCar = function() {
+            $scope.makeModel = $('#vehicleInput').val();
+            $scope.cartype = $('#vehicleTypeInput').val();
+            $scope.mileage = $('#mileageInput').val();
+
+            carRef.push({
+                name: $scope.makeModel,
+                type: $scope.cartype,
+                mileage: $scope.mileage
+            });
+            alert("clicked");
+            $scope.addCarForm.$setPristine();
+        };
+    }]);
+
+
+
     /*    
 
     carRef.push({

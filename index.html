@@ -25,11 +25,15 @@
         <!-- Add your site or application content here -->
         
         <header ng-include src="'app/partials/header.html'" ></header>
-        <div ng-include src="'app/partials/add-car.html'" ></div>
-        <main class="container">
+        
+        <main class="container" ng-controller="CarController as car">
+            <div ng-include src="'app/partials/add-car.html'" ></div>
             <div ng-include src="'car-info.html'"></div>
         </main>
+        
         <footer ng-include src="'app/partials/footer.html'" ></footer>
+        
+        
         
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
