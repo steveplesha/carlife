@@ -41,15 +41,11 @@
              (document, 'script', 'facebook-jssdk')); 
         </script>
 
-        <header ng-include src="'app/partials/header.html'" ></header>
+        <header ng-include src="'app/partials/header.html'" >
+        <div ng-include src="'app.partials/login.html'" ></div>
+        </header>
         
         <main class="container" ng-controller="CarController as car">
-            <div   
-                 class="fb-like"
-                 data-share="true"
-                 data-width="450"
-                 data-show-faces="true">
-                </div>
             
             <div ng-include src="'app/partials/add-car.html'" ></div>
             <div ng-include src="'car-info.html'"></div>
