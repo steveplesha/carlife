@@ -2,7 +2,7 @@
     var app = angular.module('myApp', ['firebase']);
     var myDataRef = new Firebase('https://burning-heat-392.firebaseio.com');
     var carRef = myDataRef.child('vehicles');
-    
+    var loginref = new Firebase("https://burning-heat-392.firebaseio.com");    
 
     
     app.controller("CarController", ["$scope", function($scope) {
@@ -23,23 +23,22 @@
         };
     }]);
 
-    app.controller('LoginController', function() {
-        var ref = new Firebase("https://burning-heat-392.firebaseio.com");
-        ref.onAuth(function(authData) {
-            if (authData) {
-                console.log("User ID: " + authData.uid + ", Provider: " + authData.provider);
-            } else {
-            }
-        });        
-        ref.authWithOAuthPopup("facebook", function(error, authData) {
-            if (authData) {
-            // the access token will allow us to make Open Graph API calls
-            console.log(authData.facebook.accessToken);
-          }
-        }, {
-          scope: "email" // the permissions requested
-        });
+
+    loginref.onAuth(function(authData) {
+        if (authData) {
+            console.log("User ID: " + authData.uid + ", Provider: " + authData.provider);
+        } else {
+        }
+    });        
+    loginref.authWithOAuthPopup("facebook", function(error, authData) {
+        if (authData) {
+        // the access token will allow us to make Open Graph API calls
+        console.log(authData.facebook.accessToken);
+      }
+    }, {
+      scope: "email" // the permissions requested
     });
+
 
 
     /*    
