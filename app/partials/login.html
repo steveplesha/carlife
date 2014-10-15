@@ -1,1 +1,53 @@
-<a href="#" class="btn btn-default bt-social" ng-click="googleLogin()">Google</a>
+<form id="frmLogin"  class="container">
+    <h2>Login</h2>
+
+    <div class="form-group">
+        <label for="loginEmail">Email address</label>
+        <input type="email" class="form-control" id="loginEmail" placeholder="enter email address" name="email" />
+    </div>
+    <div class="form-group">
+        <label for="loginPswd">Password</label>
+        <input type="password" class="form-control" id="loginPswd" placeholder="enter password" name="password" />
+    </div>
+    <button type="submit" class="btn btn-primary">Login</button>
+
+    <h2>Or log in with:</h2>
+
+    <a href="#" class="btn btn-default bt-social" data-provider="facebook">Facebook</a>
+    <a href="#" class="btn btn-default bt-social" data-provider="google">Google</a>
+</form>
+
+<form id="frmLogout">
+    <h2>Your are logged out</h2>
+</form>
+
+<form id="frmRegister">
+    <h2>Register</h2>
+    
+    <div class="form-group">
+        <label for="registerEmail">Email address</label>
+        <input type="email" class="form-control" id="loginEmail" placeholder="enter email address" name="email"/>
+    </div>
+    <div class="form-group">
+        <label for="registerPwsd">Password</label>
+        <input type="password" class="form-control" id="loginPassword" placeholder="create passwprd" name="password"/>        
+    </div>
+    <button type="submit" class="btn btn-primary">Register</button>
+</form>
+
+<form id="frmProfile" role="form">
+     <h2>Profile</h2>
+
+    <br />
+    <div class="form-group">
+        <label for="txtName">Name</label>
+        <input type="text" class="form-control" id="txtName" placeholder="Name" name="name" />
+    </div>
+    <button type="submit" class="btn btn-primary">Update</button>
+</form>
+
+<div id="alert" class="alert" >
+    <h4 id="alert-title">You are not logged in</h4>
+    
+    <p id="alert-detail"></p>
+</div>
