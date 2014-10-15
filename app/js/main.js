@@ -22,59 +22,46 @@
             $scope.addCarForm.$setPristine();
         };
     }]);
+	
+	var vehicle = [
+	{
+		name: 'Corolla',
+		type: "Sedan",
+		mileage: 90000,
+		picture: 'app/img/2006ToyotaCorolla.jpg',
+		repairs: [
+			{
+				workDone: "Oil Change",
+				cost: 35,
+				shop: "Duke of Oil"
+			}
+		]
+	},
+	{
+		name: "Grand Caravan",
+		type: "Van",
+		mileage: 40000,
+		picture: 'app/img/2012GrandCaravan.jpg'
+	}];
 
 
     loginref.onAuth(function(authData) {
         if (authData) {
             console.log("User ID: " + authData.uid + ", Provider: " + authData.provider);
         } else {
+			console.log("No go");
         }
-    });        
-    loginref.authWithOAuthPopup("facebook", function(error, authData) {
-        if (authData) {
-        // the access token will allow us to make Open Graph API calls
-        console.log(authData.facebook.accessToken);
-      }
-    }, {
-      scope: "email" // the permissions requested
-    });
-
-
-
-    /*    
-
-    carRef.push({
-        name: 'Corolla',
-            type: "Sedan",
-            mileage: 90000,
-            picture: 'app/img/2006ToyotaCorolla.jpg',
-            repairs: [
-                {
-                    workDone: "Oil Change",
-                    cost: 35,
-                    shop: "Duke of Oil"
-                }
-            ]
+    });      
+	  
+    function googleLogin() {
+        loginref.authWithOAuthPopup("google", function(err, authData) {
+            if (authData) {
+            // the access token will allow us to make Open Graph API calls
+            console.log(authData.facebook.accessToken);
+          }
+        }, {
+          scope: "email" // the permissions requested
         });
-  */  
-    var vehicle = [
-        {
-            name: 'Corolla',
-            type: "Sedan",
-            mileage: 90000,
-            picture: 'app/img/2006ToyotaCorolla.jpg',
-            repairs: [
-                {
-                    workDone: "Oil Change",
-                    cost: 35,
-                    shop: "Duke of Oil"
-                }
-            ]
-        },
-        {
-            name: "Grand Caravan",
-            type: "Van",
-            mileage: 40000,
-            picture: 'app/img/2012GrandCaravan.jpg'
-        }];
+    };
+
 })();
