@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html ng-app="myApp">
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
@@ -15,36 +16,28 @@
 
         <link rel="stylesheet" href="app/css/normalize.css">
         <link rel="stylesheet" href="app/css/main.css">
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
+        <script type="text/javascript" src="app/js/angular.min.js"></script>
+        <script type="text/javascript" src="https://cdn.firebase.com/js/client/1.0.21/firebase.js"></script>
+        <script type="text/javascript" src="https://cdn.firebase.com/libs/angularfire/0.8.2/angularfire.min.js"></script>
+        <script type="text/javascript" src="app/js/plugins.js"></script>
+        <script type="text/javascript" src="app/js/main.js"></script>
+        
         <script src="js/vendor/modernizr-2.6.2.min.js"></script>
     </head>
-    <body ng-app="myApp" >
+    <body>
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 
         <!-- Add your site or application content here -->
-        <script> 
-            window.fbAsyncInit = function() { 
-                FB.init({ 
-                    appId : '873271192697990', 
-                    xfbml : true, 
-                    version : 'v2.1' 
-                }); 
-            }; 
-            
-            (function(d, s, id){ 
-                var js, fjs = d.getElementsByTagName(s)[0]; 
-                if (d.getElementById(id)) {return;} 
-                js = d.createElement(s); js.id = id; 
-                js.src = "//connect.facebook.net/en_US/sdk.js"; 
-                fjs.parentNode.insertBefore(js, fjs); }
-             (document, 'script', 'facebook-jssdk')); 
-        </script>
-
         <header ng-include src="'app/partials/header.html'" >
             
         </header>
-        <div ng-include src="'app/partials/login.html'" class="container" ></div>
+        <div ng-controller="LoginController">
+            <div ng-include src="'app/partials/login.html'" class="container" ></div>
+        </div>
         <main class="container" ng-controller="CarController as car">
             
             <div ng-include src="'app/partials/add-car.html'" ></div>
@@ -56,15 +49,7 @@
         
         
         
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
-        <script type="text/javascript" src="app/js/angular.min.js"></script>
-        <script type="text/javascript" src="https://cdn.firebase.com/js/client/1.0.21/firebase.js"></script>
-        <script type="text/javascript" src="https://cdn.firebase.com/libs/angularfire/0.8.2/angularfire.min.js"></script>
-        <script type="text/javascript" src="app/js/plugins.js"></script>
-        <script type="text/javascript" src="app/js/main.js"></script>
-
-        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
     <script>
         (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
         function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
