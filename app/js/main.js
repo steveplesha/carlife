@@ -24,24 +24,23 @@
         };
     }]);
     
-    app.controller('LoginController', ["$scope", function($scope) {
-        $scope.register = function() {
-            alert("register clicked");
-            $scope.email = $('#emailRegister').val();
-            $scope.password = "test";
-            alert("user: " + $scope.email + " / pw: " + $scope.password);
+    app.controller('LoginController', ['$scope', 'simpleLogin', '$location', function($scope, $simpleLogin, $location) {
             
-            myDataRef.createUser({
-                email: $scope.email,
-                password: $scope.password
-            }, function(error) {
-                if (error === null) {
-                    console.log("user created successfully");
-                } else { 
-                    console.log("error creating user:", error);
+        
+            $scope.register = function() {
+                $scope.err = null;
+                alert("user: " + $scope.email + " / pw: " + $scope.password);
+
+                if( assertValidAccountProps() ) {
+                    simpleLogin.createAccount( $scope.email, $scope.password )
+                    .then(function(/* user */){
+                        $location.path('/users');
+                    }, function(err) {
+                        $scope.err = errMessage(err);
+                    });
                 }
-            });
-        };
+            };
+        
     }]);
         
                                  
