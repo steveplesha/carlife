@@ -4,24 +4,23 @@
     var app = angular.module('myApp', ['firebase']);
     var myDataRef = new Firebase('https://burning-heat-392.firebaseio.com');
     
-    app.controller("CarController", ["$scope", function($scope) {
+    app.controller("MainController", ["$scope", function($scope) {
         this.cars = vehicle;
         
         $scope.addCar = function() {
             $scope.makeModel = $('#vehicleInput').val();
             $scope.cartype = $('#vehicleTypeInput').val();
             $scope.mileage = $('#mileageInput').val();
+            var authData = myDataRef.getAuth();
 
-            carRef.push({
+            myDataRef.child('users').child(authData.uid).child('vehicles').push({
                 name: $scope.makeModel,
                 type: $scope.cartype,
                 mileage: $scope.mileage
             });
             alert("clicked");
         };
-    }]);
-    
-    app.controller('LoginController', ["$scope", function($scope) {
+
         $scope.register = function() {
             $scope.email = $('#emailRegister').val();
             $scope.password = $('#passwordInput').val();
