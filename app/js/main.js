@@ -4,7 +4,7 @@
     var app = angular.module('myApp', ['firebase']);
     var myDataRef = new Firebase('https://burning-heat-392.firebaseio.com');
     
-    app.controller("MainController", ["$scope", function($scope) {
+    app.controller("MainController", ["$scope", "$firebase", function($scope, $firebase) {
         
         $scope.addCar = function() {
             $scope.makeModel = $('#vehicleInput').val();
@@ -50,9 +50,6 @@
                     alert("user id: " + authData.uid + ", Provider: " + authData.provider);
                     vehicleRef = myDataRef.child('users').child(authData.uid).child('vehicles');
                     vehicleRef.set(authData);
-                    vehicleRef.once('value', function(dataSnapshot) {
-                        this.cars = dataSnapshot;
-                    });
                 } else {
                     alert("Error authenticating: ", error);
                 }
@@ -67,6 +64,16 @@
         myDataRef.onAuth(function(authData) {
             if (authData) {
                 $('.loginState').html("Logged In");
+                var vehicleRef = myDataRef.child('users').child(authData.uid).child('vehicles');
+                var sync = $firebase(vehicleRef);
+                var carlist = sync.$asArray();
+                    
+                carlist.$loaded().then(function() {
+                    console.log("list has " + carlist.length + " items");
+                });
+                
+                $scope.cars = carlist;
+                console.log("cars assigned");
             } else {
                 $('.loginState').html("Logged Out");
             }
