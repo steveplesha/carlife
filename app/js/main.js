@@ -5,7 +5,6 @@
     var myDataRef = new Firebase('https://burning-heat-392.firebaseio.com');
     
     app.controller("MainController", ["$scope", function($scope) {
-        this.cars = vehicle;
         
         $scope.addCar = function() {
             $scope.makeModel = $('#vehicleInput').val();
@@ -49,7 +48,11 @@
             }, function (error, authData) {
                 if (error === null) {
                     alert("user id: " + authData.uid + ", Provider: " + authData.provider);
-                    myDataRef.child('users').child(authData.uid).set(authData);
+                    vehicleRef = myDataRef.child('users').child(authData.uid).child('vehicles');
+                    vehicleRef.set(authData);
+                    vehicleRef.once('value', function(dataSnapshot) {
+                        this.cars = dataSnapshot;
+                    });
                 } else {
                     alert("Error authenticating: ", error);
                 }
@@ -68,6 +71,7 @@
                 $('.loginState').html("Logged Out");
             }
         });
+        
     }]);
             
             
