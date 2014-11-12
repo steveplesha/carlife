@@ -2,15 +2,15 @@
     <h2>Enter new car information:</h2>
     <div class="form-group">
         <label for="vehicleInput">Manufacturer and Model</label>
-        <input type="text" class="form-control" id="vehicleInput" placeholder="Manufacturer & Model"/>
+        <input type="text" class="form-control" id="vehicleInput" ng-model="makeModel" placeholder="Manufacturer & Model"/>
     </div>
     <div class="form-group">
         <label for="vehicleTypeInput">Type (Sedan, Coupe, Pickup, etc.)</label>
-        <input type="text" class="form-control" id="vehicleTypeInput" placeholder="Type (Sedan, Pickup, etc.)"/>
+        <input type="text" class="form-control" id="vehicleTypeInput" ng-model="cartype" placeholder="Type (Sedan, Pickup, etc.)"/>
     </div>
     <div class="form-group">
         <label for="mileageInput">Mileage</label>
-        <input type="number" class="form-control" id="mileageInput" placeholder="Mileage"/>
+        <input type="number" class="form-control" id="mileageInput" ng-model="mileage" placeholder="Mileage"/>
     </div>
     <button type="submit" class="btn btn-primary">+ Add</button> 
 </form>
