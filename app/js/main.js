@@ -3,6 +3,7 @@
     
     var app = angular.module('myApp', ['firebase', 'ngRoute']);
     var myDataRef = new Firebase('https://burning-heat-392.firebaseio.com');
+    var authData = myDataRef.getAuth();
     
     app.config(['$routeProvider', '$locationProvider', 
         function($routeProvider, $locationProvider) {
@@ -10,6 +11,10 @@
             
             $routeProvider.
               when('/', {
+                  templateUrl: 'app/index.html',
+                  controller: 'MainController'
+              }).
+              when('/cars', {
                   templateUrl: 'app/partials/car-info.html',
                   controller: 'MainController'
               }).
@@ -26,23 +31,25 @@
                   controller: 'MainController'
               }).
               otherwise({
-                  redirectTo: 'app/partials/car-info.html'
+                  redirectTo: 'app/index.html'
               });
         }]);
     
-    app.controller("MainController", ["$scope", "$firebase", function($scope, $firebase) {
+    app.controller("MainController", ["$scope", "$firebase", "$location", '$firebaseSimpleLogin', function($scope, $firebase, $location, $firebaseSimpleLogin) {
         var sync = $firebase(myDataRef);
+        var authClient = $firebaseSimpleLogin(myDataRef);
         
         $scope.addCar = function() {
-            var authData = myDataRef.getAuth();
+            //var authData = myDataRef.getAuth();
 
             myDataRef.child('users').child(authData.uid).child('vehicles').push({
                 name: $scope.makeModel,
-                type: $scope.cartype,
+                type: $scope.carType,
                 mileage: $scope.mileage
             });
-            myDataRef.child('users').child(authData.uid).child('vehicles').$save();
+            sync.child(authData.uid).child('vehicles').$save();
             console.log("End of addCar function reached");
+            $location.path('/cars');
         };
 
         $scope.register = function() {
@@ -51,16 +58,17 @@
             
             myDataRef.createUser({
                 email    : $scope.emailRegister,
-                password : $scope.passwordInput
+                password : $scope.passwordRegister
             }, function(error) {
                 if (error === null) {
                     console.log("user created successfully"); 
                     myDataRef.authWithPassword({
                         email   : $scope.emailRegister, 
-                        password: $scope.passwordInput
+                        password: $scope.passwordRegister
                     }, function ( error, authData) {
                         console.log("user id: " + authData.uid + ", Provider: " + authData.provider);
                         myDataRef.child('users').child(authData.uid).set(authData);
+                        $location.path('/');
                     })
                 } else { 
                     console.log("error creating user:", error);
@@ -69,28 +77,52 @@
         }; 
         
         $scope.login = function () {
-            $scope.email = $('#loginEmail').val();
-            $scope.password = $('#loginPassword').val();
             myDataRef.authWithPassword({
-                email    : $scope.email,
-                password : $scope.password
+                email    : $scope.emailLogin,
+                password : $scope.passwordLogin
             }, function (error, authData) {
                 if (error === null) {
                     console.log("user id: " + authData.uid + ", Provider: " + authData.provider);
+                    $location.path('/cars');
                 } else {
                     alert("Error authenticating: ", error);
                 }
             });
         };
         
+        $('.bt-social').on('click', function(e) {
+            var $currentButton = $(this);
+            var provider = $currentButton.data("provider");
+            e.preventDefault();
+            console.log("bt social clicked with provider " + provider);
+            
+            thirdPartyLogin(provider);
+        });
+            
+        function thirdPartyLogin(provider) {
+            console.log("third party login entered");
+            myDataRef.authWithOAuthPopup(provider, function (error, authData) {
+                if (error === null) {
+                    console.log("user id: " + authData.uid + ", Provider: " + authData.provider);
+                    $location.path('/cars');
+                } else {
+                    alert("Error authenticating: ", error);
+                }
+            });
+        };
+                    
+            
+        
+        
         $scope.logout = function() {
             myDataRef.unauth();
             alert("You are logged out");
+            $location.path('/');
         };
         
         myDataRef.onAuth(function(authData) {
             if (authData) {
-                $('.loginState').html("Logged In");
+                $('.login-state').html("Logged In");
                 var vehicleRef = myDataRef.child('users').child(authData.uid).child('vehicles');
                 var sync = $firebase(vehicleRef);
                 carlist = sync.$asArray();
@@ -106,6 +138,7 @@
                 $('.loginState').html("Logged Out");
             }
         });    
+        
     }]);
             
     function handleFileSelect(evt) {
@@ -123,7 +156,7 @@
                // Set the file payload to Firebase and register an onComplete handler to stop the spinner and show the preview
                f.set(filePayload, function() { 
                  // spinner.stop();
-                 document.getElementById("pano").src = e.target.result;
+                            //document.getElementById("pano").src = e.target.result;
                  //$('#file-upload').hide();
                  // Update the location bar so the URL can be shared with others
                  window.location.hash = hash;
@@ -141,7 +174,7 @@
         if (hash === '') {
             // No hash found, so render the file upload button.
             $('#file-upload').show();
-            document.getElementById("file-upload").addEventListener('change', handleFileSelect, false);
+            //document.getElementById("file-upload").addEventListener('change', handleFileSelect, false);
         } else {
             // A hash was passed in, so let's retrieve and render it.
             // spinner.spin(document.getElementById('spin'));

@@ -3,12 +3,13 @@
         <ul class="nav nav-pills">
             <li class="active"><a class="brand" href="#">CarLife</a></li>
             <li><a href="/">Home</a></li>
-            <li><a href="/login">Login</a></li>
-            <li><a href="/register">Register</a></li>
-            <li><a href="/addcar">Add car</a></li>
-            <li><a href="" class="btnLogout" ng-click="logout()">Logout</a></li>
+            <li ng-show="$scope.authData"><a href="/cars">Your Cars</a></li>
+            <li ng-hide="authData"><a href="/login">Login</a></li>
+            <li ng-hide="authData"><a href="/register">Register</a></li>
+            <li ng-show="authData"><a href="/addcar">Add car</a></li>
+            <li ng-show="authData"><a href="" class="btnLogout" ng-click="logout()">Logout</a></li>
         </ul>
     </div>
-    <div class="pull-right"><span class="loginState">Not logged in</span></div>
+    <div class="pull-right"><span class="login-state">Not logged in</span></div>
 </div>
 <h1>The best way to track car maintenance on your car!</h1>

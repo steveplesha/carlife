@@ -97,7 +97,7 @@ textarea {
    Author's custom styles
    ========================================================================== */
 
-main { padding: 15px 0 0 15px; }
+main { padding: 15px 0 100px 15px; }
 
 .car-item {
     border: 1px solid rgb( 0, 0, 0 );
@@ -114,6 +114,7 @@ main { padding: 15px 0 0 15px; }
     display: block;
 }
 
+.login-state { padding-right: 20px; }
 
 @font-face {
   font-family: 'Glyphicons Halflings';
@@ -123,6 +124,11 @@ main { padding: 15px 0 0 15px; }
 }
 
 
+footer {
+    background-color: rgb( 68, 123, 168 );
+    color: rgb( 255, 255, 255 );   
+    padding: 50px 100px;
+}
 
 
 
