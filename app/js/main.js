@@ -40,14 +40,15 @@
         var authClient = $firebaseSimpleLogin(myDataRef);
         
         $scope.addCar = function() {
-            //var authData = myDataRef.getAuth();
-
+            console.log('add car before getAuth: ' + authData);
+            var authData = myDataRef.getAuth();
+            console.log('authdata after getAuth' + authData);
+            console.log(myDataRef.child('users').child(authData.uid));
             myDataRef.child('users').child(authData.uid).child('vehicles').push({
                 name: $scope.makeModel,
                 type: $scope.carType,
                 mileage: $scope.mileage
             });
-            sync.child(authData.uid).child('vehicles').$save();
             console.log("End of addCar function reached");
             $location.path('/cars');
         };
@@ -90,7 +91,8 @@
             });
         };
         
-        $('.bt-social').on('click', function(e) {
+        $('.bt-social').on('click', function(e) { 
+        
             var $currentButton = $(this);
             var provider = $currentButton.data("provider");
             e.preventDefault();
@@ -116,6 +118,8 @@
         
         $scope.logout = function() {
             myDataRef.unauth();
+            $scope.authData="";
+            $('.login-state').html("Not logged in");
             alert("You are logged out");
             $location.path('/');
         };
@@ -123,6 +127,7 @@
         myDataRef.onAuth(function(authData) {
             if (authData) {
                 $('.login-state').html("Logged In");
+                $scope.authData = authData;
                 var vehicleRef = myDataRef.child('users').child(authData.uid).child('vehicles');
                 var sync = $firebase(vehicleRef);
                 carlist = sync.$asArray();

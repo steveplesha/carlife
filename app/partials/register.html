@@ -1,5 +1,5 @@
 <form id="frmRegister"  class="container" ng-controller="MainController" ng-submit="register()">
-    <h2>Register</h2>
+    <h2>Register with username and password:</h2>
 
     <div class="form-group">
         <label for="emailRegister">Email address</label>
@@ -10,4 +10,8 @@
         <input type="password" class="form-control" id="passwordInput" ng-model="passwordRegister" placeholder="enter password" name="password" />
     </div>
     <button type="submit" class="btn btn-primary">Register</button>
+    
+    <h2>Or login with:</h2>
+    <a href = '#' class='btn bt-social facebook-btn' data-provider="facebook">Facebook</a>
+    <a href = '#' class='btn bt-social google-btn' data-provider="google">Google</a>    
 </form>
