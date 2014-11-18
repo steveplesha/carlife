@@ -30,32 +30,57 @@
                   templateUrl: 'app/partials/login.html',
                   controller: 'MainController'
               }).
+              when('/addrepair/:id', {
+                  templateUrl: 'app/partials/add-repair.html',
+                  controller: 'MainController'
+              }).
               otherwise({
                   redirectTo: 'app/index.html'
               });
         }]);
     
-    app.controller("MainController", ["$scope", "$firebase", "$location", '$firebaseSimpleLogin', function($scope, $firebase, $location, $firebaseSimpleLogin) {
+    app.controller("MainController", ["$scope", "$firebase", "$location", "$routeParams", function($scope, $firebase, $location, $routeParams) {
         var sync = $firebase(myDataRef);
-        var authClient = $firebaseSimpleLogin(myDataRef);
         
         $scope.addCar = function() {
-            console.log('add car before getAuth: ' + authData);
+            console.log('authData before getAuth: ' + authData);
             var authData = myDataRef.getAuth();
             console.log('authdata after getAuth' + authData);
             console.log(myDataRef.child('users').child(authData.uid));
+            $scope.picture = "app/img/default-vehicle.png";
             myDataRef.child('users').child(authData.uid).child('vehicles').push({
-                name: $scope.makeModel,
-                type: $scope.carType,
-                mileage: $scope.mileage
+                year: $scope.year,
+                make: $scope.make,
+                model: $scope.model,
+                picture: $scope.picture
             });
             console.log("End of addCar function reached");
             $location.path('/cars');
         };
+        
+        $scope.addRepair = function() {
+            console.log("Starting addRepair");
+            var authData = myDataRef.getAuth();
+            $scope.repair = $scope.vehicle[$routeParams.id];
+            console.log("scope.repair: " + $scope.repair);
+            /*
+            myDataRef.child('users').child(authData.uid).child($id).child('repairs').push({
+                work: $scope.work,
+                cost: $scope.cost,
+                mileage: $scope.mileage
+            });*/
+            console.log("End of addRepair function");
+            $location.path('/cars');
+        };
+        
+        $scope.removeCar = function() {
+            console.log("Starting removeCar");
+            var authData = myDataRef.getAuth();
+        };
 
         $scope.register = function() {
             console.log("Register function entered");
-            console.log("user: " + $scope.emailRegister + " / pw: " + $scope.passwordInput);
+            console.log("user: " + $scope.emailRegister + " / pw: " + $scope.passwordRegister);
             
             myDataRef.createUser({
                 email    : $scope.emailRegister,
@@ -113,14 +138,12 @@
             });
         };
                     
-            
-        
-        
         $scope.logout = function() {
             myDataRef.unauth();
-            $scope.authData="";
+            $scope.authData = "";
             $('.login-state').html("Not logged in");
             alert("You are logged out");
+			console.log("User logged out");
             $location.path('/');
         };
         
@@ -140,7 +163,7 @@
                 $scope.carlist = carlist;
                 console.log("cars assigned, carlist scope = " + $scope.carlist);
             } else {
-                $('.loginState').html("Logged Out");
+                $('.loginState').html("Not Logged In");
             }
         });    
         

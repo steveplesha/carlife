@@ -1,16 +1,17 @@
 <h1>Vehicles</h1>
 <div class="car-item pull-left" ng-repeat="car in carlist"> 
-    <h1>{{ car.name }}</h1>
+    <h1>{{ car.year }} {{ car.make }} {{ car.model }}</h1>
     <img class="car-image" ng-src="{{ car.picture }}"/>
-    <p>{{ car.type }}</p>
-    <p>{{ car.mileage | number }} miles</p>
     <h2>Add Image</h2>
     <input type="file" accept="image/*" capture="camera" id="file-upload"><br/>
     <img id='pano' />
     <h2>Work done</h2>
-    <!--<div ng-repeat="repair in vehicle.repairs">
+    <div ng-repeat="repair in vehicle.repairs">
         <p>Job: {{ repair.workDone }}</p>
-        <p>Cost: {{ repair.cost | currency }}</p>
-        <p>Shop: {{ repair.shop }}</p>
-    </div>-->
+    </div>
+    <a href="/addrepair/{{$index}}" ng-click="addRepair()">Add Repair</a>
+    <div>
+        <a href='#' ng-click="editCar()">Edit</a>
+        <a href='#' ng-click="deleteCar()">Delete</a>
+    </div>
 </div>

@@ -1,16 +1,16 @@
 <form id="addCarForm" name="addCarForm" ng-submit="addCar()">
     <h2>Enter new car information:</h2>
     <div class="form-group">
-        <label for="vehicleInput">Manufacturer and Model</label>
-        <input type="text" class="form-control" id="vehicleInput" ng-model="makeModel" placeholder="Manufacturer & Model"/>
+        <label for="year">Year</label>
+        <input type="number" class="form-control" id="year" ng-model="year" placeholder="enter year car was made"/>
     </div>
     <div class="form-group">
-        <label for="vehicleTypeInput">Type (Sedan, Coupe, Pickup, etc.)</label>
-        <input type="text" class="form-control" id="vehicleTypeInput" ng-model="carType" placeholder="Type (Sedan, Pickup, etc.)"/>
+        <label for="make">Manufacturer</label>
+        <input type="text" class="form-control" id="make" ng-model="make" placeholder="enter manufactuer of car"/>
     </div>
     <div class="form-group">
-        <label for="mileageInput">Mileage</label>
-        <input type="number" class="form-control" id="mileageInput" ng-model="mileage" placeholder="Mileage"/>
+        <label for="model">Model</label>
+        <input type="text" class="form-control" id="model" ng-model="model" placeholder="enter model of car"/>
     </div>
     <button type="submit" class="btn btn-primary">+ Add</button> 
 </form>

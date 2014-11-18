@@ -1,0 +1,16 @@
+<form id="addCarForm" name="addCarForm" ng-submit="addRepair()">
+    <h2>Enter repair information for {{ car.make }} {{ car.model }}:</h2>
+    <div class="form-group">
+        <label for="work">Work done:</label>
+        <input type="string" class="form-control" id="work" ng-model="work" placeholder="enter maintenance work done"/>
+    </div>
+    <div class="form-group">
+        <label for="cost">Cost</label>
+        <input type="number" class="form-control" id="cost" ng-model="cost" placeholder="enter cost of work done"/>
+    </div>
+    <div class="form-group">
+        <label for="mileage">Mileage</label>
+        <input type="number" class="form-control" id="mileage" ng-model="mileage" placeholder="enter mileage of car when work was done"/>
+    </div>
+    <button type="submit" class="btn btn-primary">+ Add</button> 
+</form>
