@@ -1,5 +1,4 @@
 (function () {
-
     
     var app = angular.module('myApp', ['firebase', 'ngRoute']);
     var myDataRef = new Firebase('https://burning-heat-392.firebaseio.com');
@@ -40,35 +39,50 @@
         }]);
     
     app.controller("MainController", ["$scope", "$firebase", "$location", "$routeParams", function($scope, $firebase, $location, $routeParams) {
-        var sync = $firebase(myDataRef);
+        //var sync = $firebase(myDataRef);
         
-        $scope.addCar = function() {
+        $scope.addCar = function(year, make, model) {
             console.log('authData before getAuth: ' + authData);
             var authData = myDataRef.getAuth();
-            console.log('authdata after getAuth' + authData);
-            console.log(myDataRef.child('users').child(authData.uid));
-            $scope.picture = "app/img/default-vehicle.png";
-            myDataRef.child('users').child(authData.uid).child('vehicles').push({
+            var vehicleRef = myDataRef.child('users').child(authData.uid).child('vehicles');
+            //var sync = $firebase(vehicleRef);
+
+            
+            var picture = "app/img/default-vehicle.png";
+
+            $scope.carlist.$add({year: year, make: make, model: model, picture: picture}).then(function(vehicleRef) {
+                var recordUid = vehicleRef.name();
+                console.log("vehicleRef name: " + recordUid);
+                $scope.carlist[recordUid].id = recordUid;
+                $scope.carlist.$save(recordUid);
+            });
+            /*vehicleRef.push({
                 year: $scope.year,
                 make: $scope.make,
                 model: $scope.model,
                 picture: $scope.picture
-            });
+            });*/
+
             console.log("End of addCar function reached");
             $location.path('/cars');
+            
         };
         
-        $scope.addRepair = function() {
+        $scope.addRepair = function(carID) {
             console.log("Starting addRepair");
             var authData = myDataRef.getAuth();
-            $scope.repair = $scope.vehicle[$routeParams.id];
+            //console.log($scope.$index);
+            //console.log(carID);
+            /*$scope.repair = $scope.vehicle[$routeParams.id];
             console.log("scope.repair: " + $scope.repair);
-            /*
-            myDataRef.child('users').child(authData.uid).child($id).child('repairs').push({
+            */
+            console.log("scope.id: " + $scope.$id);
+            console.log("scope.id without $ on id:" + $scope.id);
+            myDataRef.child('users').child(authData.uid).child('vehicles').child(carID).child('repairs').push({
                 work: $scope.work,
                 cost: $scope.cost,
                 mileage: $scope.mileage
-            });*/
+            });
             console.log("End of addRepair function");
             $location.path('/cars');
         };
@@ -152,6 +166,7 @@
                 $('.login-state').html("Logged In");
                 $scope.authData = authData;
                 var vehicleRef = myDataRef.child('users').child(authData.uid).child('vehicles');
+                //var vehicleRef = myDataRef.child('users').child(authData.uid).child('vehicles');
                 var sync = $firebase(vehicleRef);
                 carlist = sync.$asArray();
                     
