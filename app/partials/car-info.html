@@ -10,9 +10,9 @@
     <div ng-repeat="repair in vehicle.repairs">
         <p>Job: {{ repair.workDone }}</p>
     </div>
-    <a href="/addrepair/{{car.$id}}" ng-click="addRepair()">Add Repair</a>
+    <a href="/addrepair/{{car.$id}}" >Add Repair</a>
     <div>
-        <a href='#' ng-click="editCar()">Edit</a>
+        <a href='/editcar/{{car.$index}}'>Edit</a>
         <a href='#' ng-click="deleteCar()">Delete</a>
     </div>
 </div>

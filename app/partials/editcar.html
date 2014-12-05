@@ -1,0 +1,16 @@
+<form id="editCarForm" name="editCarForm" ng-submit="editCar(year, make, model)">
+    <h2>Edit car information:</h2>
+    <div class="form-group">
+        <label for="year">Year</label>
+        <input type="number" class="form-control" id="year" ng-model="year" placeholder="enter year car was made"/>
+    </div>
+    <div class="form-group">
+        <label for="make">Manufacturer</label>
+        <input type="text" class="form-control" id="make" ng-model="make" placeholder="enter manufactuer of car"/>
+    </div>
+    <div class="form-group">
+        <label for="model">Model</label>
+        <input type="text" class="form-control" id="model" ng-model="model" placeholder="enter model of car"/>
+    </div>
+    <button type="submit" class="btn btn-primary">+ Add</button> 
+</form>

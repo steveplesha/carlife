@@ -15,7 +15,7 @@
               }).
               when('/cars', {
                   templateUrl: 'app/partials/car-info.html',
-                  controller: 'MainController'
+                  controller: 'editCarController'
               }).
               when('/register', {
                   templateUrl: 'app/partials/register.html',
@@ -23,6 +23,10 @@
               }).
               when('/addcar', {
                   templateUrl: 'app/partials/add-car.html',
+                  controller: 'MainController'
+              }).
+              when('/editcar/:id', {
+                  templateUrl: 'app/partials/editcar.html',
                   controller: 'MainController'
               }).
               when('/login', {
@@ -37,6 +41,8 @@
                   redirectTo: 'app/index.html'
               });
         }]);
+    
+
     
     app.controller("MainController", ["$scope", "$firebase", "$location", "$routeParams", function($scope, $firebase, $location, $routeParams) {
         //var sync = $firebase(myDataRef);
@@ -67,6 +73,15 @@
             $location.path('/cars');
             
         };
+        
+        $scope.editCar = function(year, make, model) {
+            console.log("start editcar function");
+            $scope.vehicle = $scope.carlist[$routeParams.id];
+            console.log($scope.vehicle);
+            $scope.$save();
+            $location.path('/cars');
+        }
+            
         
         $scope.addRepair = function(carID) {
             console.log("Starting addRepair");
@@ -182,6 +197,15 @@
             }
         });    
         
+    }]);
+    
+    app.controller("editCarController", ["$scope", "$firebase", "$location", "$routeParams", function($scope, $firebase, $location, $routeParams) {
+        console.log("starting edit controller");
+        var authData = myDataRef.getAuth();
+        var sync = new Firebase(myDataRef + '/users/' + authData + '/vehicles/');
+        //$scope.vehicle = sync[$routeParams.id];
+        //console.log($scope.vehicle);
+        //$location.path('/cars');
     }]);
             
     function handleFileSelect(evt) {

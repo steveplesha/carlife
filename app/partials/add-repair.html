@@ -1,4 +1,4 @@
-<form id="addCarForm" name="addCarForm" ng-submit="addRepair()">
+<form id="addCarForm" name="addCarForm" ng-submit="addRepair( {{ car.$id }})">
     <h2>Enter repair information for {{ car.make }} {{ car.model }}:</h2>
     <div class="form-group">
         <label for="work">Work done:</label>
