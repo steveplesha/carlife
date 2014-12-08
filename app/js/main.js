@@ -15,7 +15,7 @@
               }).
               when('/cars', {
                   templateUrl: 'app/partials/car-info.html',
-                  controller: 'editCarController'
+                  controller: 'MainController'
               }).
               when('/register', {
                   templateUrl: 'app/partials/register.html',
@@ -27,7 +27,7 @@
               }).
               when('/editcar/:id', {
                   templateUrl: 'app/partials/editcar.html',
-                  controller: 'MainController'
+                  controller: 'editCarController'
               }).
               when('/login', {
                   templateUrl: 'app/partials/login.html',
@@ -202,10 +202,13 @@
     app.controller("editCarController", ["$scope", "$firebase", "$location", "$routeParams", function($scope, $firebase, $location, $routeParams) {
         console.log("starting edit controller");
         var authData = myDataRef.getAuth();
-        var sync = new Firebase(myDataRef + '/users/' + authData + '/vehicles/');
-        //$scope.vehicle = sync[$routeParams.id];
-        //console.log($scope.vehicle);
-        //$location.path('/cars');
+        var ref = new Firebase(myDataRef + '/users/' + authData.uid + '/vehicles/');
+        var sync = $firebase(ref);
+        var carlist = sync.$asArray();
+        console.log(carlist);
+        console.log(carlist[$routeParams.id]);
+        $scope.vehicle = carlist.$getRecord($routeParams.id);
+        console.log($scope.vehicle);
     }]);
             
     function handleFileSelect(evt) {
@@ -232,7 +235,7 @@
             })(f);
             reader.readAsDataURL(f);
         }        
-    $(function() {
+    /*$(function() {
         // $('#spin').append(spinner);
         console.log("entered function");
         var myDataRef = new Firebase('https://burning-heat-392.firebaseio.com');
@@ -257,5 +260,5 @@
             //spinner.stop();
         });
       }
-    });  
+    }); */ 
 }())
