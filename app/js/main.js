@@ -50,18 +50,18 @@
         $scope.addCar = function(year, make, model) {
             console.log('authData before getAuth: ' + authData);
             var authData = myDataRef.getAuth();
-            var vehicleRef = myDataRef.child('users').child(authData.uid).child('vehicles');
+            var currentUser = myDataRef.child('users').child(authData.uid);
+            var vehicleRef = myDataRef.child('vehicles').push();
+            var vehicleRefID = vehicleRef.name();
+            //var vehicleRef = myDataRef.child('users').child(authData.uid).child('vehicles');
             //var sync = $firebase(vehicleRef);
 
-            
+            console.log("current user: " + currentUser);
+            console.log("vehiclerefid: " + vehicleRefID);
             var picture = "app/img/default-vehicle.png";
 
-            $scope.carlist.$add({year: year, make: make, model: model, picture: picture}).then(function(vehicleRef) {
-                var recordUid = vehicleRef.name();
-                console.log("vehicleRef name: " + recordUid);
-                $scope.carlist[recordUid].id = recordUid;
-                $scope.carlist.$save(recordUid);
-            });
+            vehicleRef.set({year: year, make: make, model: model, picture: picture});
+            currentUser.child("vehicles").child(vehicleRefID).set(true);
             /*vehicleRef.push({
                 year: $scope.year,
                 make: $scope.make,
