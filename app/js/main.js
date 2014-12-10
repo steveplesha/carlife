@@ -60,7 +60,7 @@
             console.log("vehiclerefid: " + vehicleRefID);
             var picture = "app/img/default-vehicle.png";
 
-            vehicleRef.set({year: year, make: make, model: model, picture: picture});
+            vehicleRef.set({year: year, make: make, model: model, picture: picture, user: authData.uid});
             currentUser.child("vehicles").child(vehicleRefID).set(true);
             /*vehicleRef.push({
                 year: $scope.year,
@@ -180,8 +180,18 @@
             if (authData) {
                 $('.login-state').html("Logged In");
                 $scope.authData = authData;
-                var vehicleRef = myDataRef.child('users').child(authData.uid).child('vehicles');
                 //var vehicleRef = myDataRef.child('users').child(authData.uid).child('vehicles');
+                var vehicleRef = myDataRef.child('vehicles').child(authData.uid);                
+                var userRef = myDataRef.child('users').child(authData.uid);                
+                var userVehicleRef = userRef.child(authData.uid).child('vehicles');
+                var carlist = {};
+
+                userVehicleRef.on("value", function(dataSnapshot) {
+                    console.log('entered vehicleref once function');
+                    carlist = dataSnapshot.$asArray();
+                });
+                
+                /*
                 var sync = $firebase(vehicleRef);
                 carlist = sync.$asArray();
                     
@@ -189,8 +199,10 @@
                     console.log("list has " + carlist.length + " items");
                     console.log(carlist);
                 });
-                
+                */
                 $scope.carlist = carlist;
+                
+                
                 console.log("cars assigned, carlist scope = " + $scope.carlist);
             } else {
                 $('.loginState').html("Not Logged In");
