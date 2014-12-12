@@ -181,14 +181,17 @@
                 $('.login-state').html("Logged In");
                 $scope.authData = authData;
                 //var vehicleRef = myDataRef.child('users').child(authData.uid).child('vehicles');
-                var vehicleRef = myDataRef.child('vehicles').child(authData.uid);                
+                var vehicleRef = new Firebase(myDataRef+ '/vehicles');//.child(authData.uid);                
                 var userRef = myDataRef.child('users').child(authData.uid);                
                 var userVehicleRef = userRef.child(authData.uid).child('vehicles');
-                var carlist = {};
 
-                userVehicleRef.on("value", function(dataSnapshot) {
-                    console.log('entered vehicleref once function');
-                    carlist = dataSnapshot.$asArray();
+
+                vehicleRef.once("value", function(dataSnapshot) {
+                    console.log('entered vehicleref function');
+                    var carlist = dataSnapshot.$asArray();
+                    console.log(carlist);
+                    $scope.carlist = carlist;
+                    console.log("scope.carlist: " + $scope.carlist);
                 });
                 
                 /*
@@ -200,7 +203,6 @@
                     console.log(carlist);
                 });
                 */
-                $scope.carlist = carlist;
                 
                 
                 console.log("cars assigned, carlist scope = " + $scope.carlist);
