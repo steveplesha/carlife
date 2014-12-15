@@ -102,9 +102,10 @@
             $location.path('/cars');
         };
         
-        $scope.removeCar = function() {
+        $scope.removeCar = function(car) {
             console.log("Starting removeCar");
             var authData = myDataRef.getAuth();
+            $scope.carlist.$remove(car);
         };
 
         $scope.register = function() {
@@ -181,20 +182,21 @@
                 $('.login-state').html("Logged In");
                 $scope.authData = authData;
                 //var vehicleRef = myDataRef.child('users').child(authData.uid).child('vehicles');
-                var vehicleRef = new Firebase(myDataRef+ '/vehicles');//.child(authData.uid);                
+                var vehicleRef = new Firebase(myDataRef + '/vehicles');//.child(authData.uid);                
                 var userRef = myDataRef.child('users').child(authData.uid);                
                 var userVehicleRef = userRef.child(authData.uid).child('vehicles');
 
-
+/*
                 vehicleRef.once("value", function(dataSnapshot) {
                     console.log('entered vehicleref function');
-                    var carlist = dataSnapshot.$asArray();
+                    var carlist = [];
+                    carlist = dataSnapshot.val();
                     console.log(carlist);
                     $scope.carlist = carlist;
                     console.log("scope.carlist: " + $scope.carlist);
                 });
+  */              
                 
-                /*
                 var sync = $firebase(vehicleRef);
                 carlist = sync.$asArray();
                     
@@ -202,7 +204,9 @@
                     console.log("list has " + carlist.length + " items");
                     console.log(carlist);
                 });
-                */
+                
+                $scope.carlist = carlist;
+                
                 
                 
                 console.log("cars assigned, carlist scope = " + $scope.carlist);
