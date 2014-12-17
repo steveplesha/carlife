@@ -207,7 +207,7 @@
  
                 
                 
-                console.log("cars assigned, carlist scope = " + $scope.carlist);
+                //console.log("cars assigned, carlist scope = " + $scope.carlist);
             } else {
                 $('.loginState').html("Not Logged In");
             }
@@ -219,7 +219,10 @@
         console.log("starting edit controller");
         var authData = myDataRef.getAuth();
         var ref = new Firebase(myDataRef + '/vehicles');
+        var vehicleRef = myDataRef.child('vehicles')
         var sync = $firebase(ref);
+        var id = $routeParams.id;
+        console.log("id is " + id);
         //var carlist = ref.$asArray();
         ref.once('value', function(snap) {
             console.log("started ref.once  ");
@@ -234,8 +237,8 @@
         $scope.editCar = function(year, make, model) {
             console.log("start editcar function");
             console.log($scope.vehicle);
-            $scope.vehicle.set({year: year, make: make, model: model});
-            $scope.$save();
+            vehicleRef.child(id).update({year: year, make: make, model: model});
+            //$scope.$save();
             $location.path('/cars');
         };
     }]);
