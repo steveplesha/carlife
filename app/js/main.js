@@ -74,15 +74,6 @@
             
         };
         
-        $scope.editCar = function(year, make, model) {
-            console.log("start editcar function");
-            $scope.vehicle = $scope.carlist[$routeParams.id];
-            console.log($scope.vehicle);
-            $scope.$save();
-            $location.path('/cars');
-        }
-            
-        
         $scope.addRepair = function(carID) {
             console.log("Starting addRepair");
             var authData = myDataRef.getAuth();
@@ -91,7 +82,7 @@
             /*$scope.repair = $scope.vehicle[$routeParams.id];
             console.log("scope.repair: " + $scope.repair);
             */
-            console.log("scope.id: " + $scope.$id);
+            console.log("scope.id: " + $scope.id);
             console.log("scope.id without $ on id:" + $scope.id);
             myDataRef.child('users').child(authData.uid).child('vehicles').child(carID).child('repairs').push({
                 work: $scope.work,
@@ -185,7 +176,7 @@
                 var userRef = new Firebase(myDataRef + '/users/' + authData.uid); 
                 var vehicleRef = new Firebase(myDataRef + '/vehicles');//.child(authData.uid);                
                 var userVehicleRef = userRef.child(authData.uid).child('vehicles');
-                                
+/*                                
                 userVehicleRef.on('child_added', function(snap) {
                     console.log("snap is " + snap);
                     vehicleRef.child(snap.key()).once("value", function(data) {
@@ -203,7 +194,7 @@
                     console.log("scope.carlist: " + $scope.carlist);
                 });
 */              
-/*
+
                 var sync = $firebase(vehicleRef);
                 carlist = sync.$asArray();
                     
@@ -211,7 +202,7 @@
                     console.log("list has " + carlist.length + " items");
                     console.log(carlist);
                 });
-*/            
+            
                 $scope.carlist = carlist;
  
                 
@@ -227,13 +218,26 @@
     app.controller("editCarController", ["$scope", "$firebase", "$location", "$routeParams", function($scope, $firebase, $location, $routeParams) {
         console.log("starting edit controller");
         var authData = myDataRef.getAuth();
-        var ref = new Firebase(myDataRef + '/users/' + authData.uid + '/vehicles/');
+        var ref = new Firebase(myDataRef + '/vehicles');
         var sync = $firebase(ref);
-        var carlist = sync.$asArray();
-        console.log(carlist);
-        console.log(carlist[$routeParams.id]);
+        //var carlist = ref.$asArray();
+        ref.once('value', function(snap) {
+            console.log("started ref.once  ");
+            var carlist = snap.val();
+            console.log("carlist is :" + carlist);
+        });
+        console.log("carlist is " + carlist);
+        //console.log("carlist[routeparam] is " + carlist[$routeParams.id]);
         $scope.vehicle = carlist.$getRecord($routeParams.id);
         console.log($scope.vehicle);
+        
+        $scope.editCar = function(year, make, model) {
+            console.log("start editcar function");
+            console.log($scope.vehicle);
+            $scope.vehicle.set({year: year, make: make, model: model});
+            $scope.$save();
+            $location.path('/cars');
+        };
     }]);
             
     function handleFileSelect(evt) {
