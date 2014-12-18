@@ -6,12 +6,17 @@
     <input type="file" accept="image/*" capture="camera" id="file-upload"><br/>
     <img id='pano' />
     <h2>Work done</h2>
-    <div ng-repeat="repair in vehicle.repairs">
-        <p>Job: {{ repair.workDone }}</p>
+    <div ng-repeat="repair in car.repairs">
+        <p>Job: {{ repair.work }}</p>
+        <p>Mileage when work done: {{ repair.mileage }}</p>
+        <p>Cost: {{ repair.cost | currency }}</p>
     </div>
-    <a href="/addrepair/{{car.$id}}" >Add Repair</a>
+    
     <div>
-        <a href='/editcar/{{car.$id}}'>Edit</a>
-        <a href='#' ng-click="removeCar(car)">Delete</a>
+       <ul>
+           <li><a href="/addrepair/{{car.$id}}" >Add a repair entry</a></li>          
+           <li><a href='/editcar/{{car.$id}}'>Edit car details</a></li>
+           <li><a href='#' ng-click="removeCar(car)">Delete this car</a></li>
+        </ul>
     </div>
 </div>

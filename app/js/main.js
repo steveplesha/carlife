@@ -27,7 +27,7 @@
               }).
               when('/editcar/:id', {
                   templateUrl: 'app/partials/editcar.html',
-                  controller: 'editCarController'
+                  controller: 'EditCarController'
               }).
               when('/login', {
                   templateUrl: 'app/partials/login.html',
@@ -35,7 +35,7 @@
               }).
               when('/addrepair/:id', {
                   templateUrl: 'app/partials/add-repair.html',
-                  controller: 'MainController'
+                  controller: 'EditCarController'
               }).
               otherwise({
                   redirectTo: 'app/index.html'
@@ -72,25 +72,6 @@
             console.log("End of addCar function reached");
             $location.path('/cars');
             
-        };
-        
-        $scope.addRepair = function(carID) {
-            console.log("Starting addRepair");
-            var authData = myDataRef.getAuth();
-            //console.log($scope.$index);
-            //console.log(carID);
-            /*$scope.repair = $scope.vehicle[$routeParams.id];
-            console.log("scope.repair: " + $scope.repair);
-            */
-            console.log("scope.id: " + $scope.id);
-            console.log("scope.id without $ on id:" + $scope.id);
-            myDataRef.child('users').child(authData.uid).child('vehicles').child(carID).child('repairs').push({
-                work: $scope.work,
-                cost: $scope.cost,
-                mileage: $scope.mileage
-            });
-            console.log("End of addRepair function");
-            $location.path('/cars');
         };
         
         $scope.removeCar = function(car) {
@@ -215,7 +196,7 @@
         
     }]);
     
-    app.controller("editCarController", ["$scope", "$firebase", "$location", "$routeParams", function($scope, $firebase, $location, $routeParams) {
+    app.controller("EditCarController", ["$scope", "$firebase", "$location", "$routeParams", function($scope, $firebase, $location, $routeParams) {
         console.log("starting edit controller");
         var authData = myDataRef.getAuth();
         var ref = new Firebase(myDataRef + '/vehicles');
@@ -239,6 +220,19 @@
             console.log($scope.vehicle);
             vehicleRef.child(id).update({year: year, make: make, model: model});
             //$scope.$save();
+            $location.path('/cars');
+        };
+		
+        $scope.addRepair = function(work, cost, mileage) {
+            console.log("Starting addRepair");
+            console.log("scope.id: " + $scope.id);
+            console.log("scope.id without $ on id:" + $scope.id);
+            vehicleRef.child(id).child('repairs').push({
+                work: $scope.work,
+                cost: $scope.cost,
+                mileage: $scope.mileage
+            });
+            console.log("End of addRepair function");
             $location.path('/cars');
         };
     }]);
