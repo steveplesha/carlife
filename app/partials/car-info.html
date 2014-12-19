@@ -2,9 +2,6 @@
 <div class="car-item pull-left" ng-repeat="car in carlist"> 
     <h1>{{ car.year }} {{ car.make }} {{ car.model }}</h1>
     <img class="car-image" ng-src="{{ car.picture }}"/>
-    <h2>Add Image</h2>
-    <input type="file" accept="image/*" capture="camera" id="file-upload"><br/>
-    <img id='pano' />
     <h2>Work done</h2>
     <div ng-repeat="repair in car.repairs">
         <p>Job: {{ repair.work }}</p>
