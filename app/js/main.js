@@ -42,26 +42,23 @@
               });
         }]);
     
-
     
     app.controller("MainController", ["$scope", "$firebase", "$location", "$routeParams", function($scope, $firebase, $location, $routeParams) {
-        //var sync = $firebase(myDataRef);
         
         $scope.addCar = function(year, make, model) {
             console.log('authData before getAuth: ' + authData);
             var authData = myDataRef.getAuth();
-            var currentUser = myDataRef.child('users').child(authData.uid);
-            var vehicleRef = myDataRef.child('vehicles').push();
-            var vehicleRefID = vehicleRef.name();
+            var currentUserRef = myDataRef.child('users').child(authData.uid);
+            //var vehicleRef = myDataRef.child('vehicles').push();
+            //var vehicleRefID = vehicleRef.name();
             //var vehicleRef = myDataRef.child('users').child(authData.uid).child('vehicles');
             //var sync = $firebase(vehicleRef);
 
-            console.log("current user: " + currentUser);
-            console.log("vehiclerefid: " + vehicleRefID);
+            //console.log("current user: " + currentUser);
+            //console.log("vehiclerefid: " + vehicleRefID);
             var picture = "app/img/default-vehicle.png";
 
-            vehicleRef.set({year: year, make: make, model: model, picture: picture, user: authData.uid});
-            currentUser.child("vehicles").child(vehicleRefID).set(true);
+            currentUserRef.child('vehicles').push({year: year, make: make, model: model, picture: picture, user: authData.uid});
             /*vehicleRef.push({
                 year: $scope.year,
                 make: $scope.make,
@@ -154,29 +151,10 @@
                 $('.login-state').html("Logged In");
                 $scope.authData = authData;
                 //var vehicleRef = myDataRef.child('users').child(authData.uid).child('vehicles');
-                var userRef = new Firebase(myDataRef + '/users/' + authData.uid); 
-                var vehicleRef = new Firebase(myDataRef + '/vehicles');//.child(authData.uid);                
-                var userVehicleRef = userRef.child(authData.uid).child('vehicles');
-/*                                
-                userVehicleRef.on('child_added', function(snap) {
-                    console.log("snap is " + snap);
-                    vehicleRef.child(snap.key()).once("value", function(data) {
-                        console.log("entering carlist assign");
-                        var carlist = data.$asArray();
-                    });
-                });
-/*
-                vehicleRef.once("value", function(dataSnapshot) {
-                    console.log('entered vehicleref function');
-                    var carlist = [];
-                    carlist = dataSnapshot.val();
-                    console.log(carlist);
-                    $scope.carlist = carlist;
-                    console.log("scope.carlist: " + $scope.carlist);
-                });
-*/              
-
-                var sync = $firebase(vehicleRef);
+                var userRef = new Firebase(myDataRef + '/users/' + authData.uid);       
+                var userVehicleRef = new Firebase(myDataRef + '/users/' + authData.uid + '/vehicles');
+                console.log(userVehicleRef);
+                var sync = $firebase(userVehicleRef);
                 carlist = sync.$asArray();
                     
                 carlist.$loaded().then(function() {
@@ -199,8 +177,8 @@
     app.controller("EditCarController", ["$scope", "$firebase", "$location", "$routeParams", function($scope, $firebase, $location, $routeParams) {
         console.log("starting edit controller");
         var authData = myDataRef.getAuth();
-        var ref = new Firebase(myDataRef + '/vehicles');
-        var vehicleRef = myDataRef.child('vehicles')
+        var ref = new Firebase(myDataRef + 'users/' + authData.uid + '/vehicles');
+        var vehicleRef = myDataRef.child('users').child(authData.uid).child('vehicles')
         var sync = $firebase(ref);
         var id = $routeParams.id;
         console.log("id is " + id);
