@@ -50,7 +50,7 @@
             var authData = myDataRef.getAuth();
             var currentUserRef = myDataRef.child('users').child(authData.uid);
             var spinner = new Spinner({color: '#ddd'});
-            var picture = "app/img/default-vehicle.png";
+            $scope.picture = "app/img/default-vehicle.png";
 
             $scope.handleFileSelectAdd = function(evt) {
                 var f = evt.target.files[0];
@@ -58,15 +58,16 @@
                 reader.onload = (function(theFile) {
                     return function(e) {
                         var filePayload = e.target.result;
-                        picture = e.target.result;
-                        document.getElementById('pano').src = picture;
+                        $scope.picture = e.target.result;
+                        console.log("$scope.picture= " + $scope.picture);
+                        document.getElementById('pano').src = $source.picture;
                     };
                 })(f);
             reader.readAsDataURL(f);
             };
             document.getElementById('file-upload').addEventListener('change', $scope.handleFileSelectAdd, false);
 
-            currentUserRef.child('vehicles').push({year: year, make: make, model: model, picture: picture, user: authData.uid});
+            currentUserRef.child('vehicles').push({year: year, make: make, model: model, picture: $scope.picture, user: authData.uid});
             /*vehicleRef.push({
                 year: $scope.year,
                 make: $scope.make,
@@ -207,9 +208,9 @@
             var f = evt.target.files[0];
             var reader = new FileReader();
             reader.onload = (function(theFile) {
+                spinner.spin(document.getElementById('spin'));
                 return function(e) {
                     var filePayload = e.target.result;
-                    spinner.spin(document.getElementById('spin'));
                     $scope.picture = e.target.result;
                     document.getElementById('pano').src = $scope.picture;
                     spinner.stop();
