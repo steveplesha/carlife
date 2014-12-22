@@ -1,5 +1,5 @@
 console.log("loading firepano");
-var spinner = new Spinner({color: '#ddd'});
+//var spinner = new Spinner({color: '#ddd'});
 var firebaseRef = 'https://burning-heat-392.firebaseio.com/';
 
 function handleFileSelect(evt) {
@@ -12,10 +12,10 @@ function handleFileSelect(evt) {
       // Generate a location that can't be guessed using the file's contents and a random number
       var hash = CryptoJS.SHA256(Math.random() + CryptoJS.SHA256(filePayload));
       var f = new Firebase(firebaseRef + '/pano/' + hash + '/filePayload');
-      spinner.spin(document.getElementById('spin'));
+      //spinner.spin(document.getElementById('spin'));
       // Set the file payload to Firebase and register an onComplete handler to stop the spinner and show the preview
       f.set(filePayload, function() { 
-        spinner.stop();
+        //spinner.stop();
         document.getElementById("pano").src = e.target.result;
         $('#file-upload').hide();
         // Update the location bar so the URL can be shared with others
@@ -27,8 +27,8 @@ function handleFileSelect(evt) {
 }
 
 $(function() {
-  $('#spin').append(spinner);
-    console.log("starting closure function");
+  $('#spin').append("spinner");
+  console.log("starting closure function");
 
   var idx = window.location.href.indexOf('#');
   var hash = (idx > 0) ? window.location.href.slice(idx + 1) : '';
@@ -47,7 +47,7 @@ $(function() {
       } else {
         $('#body').append("Not found");
       }
-      spinner.stop();
+      //spinner.stop();
     });
   }
 });
