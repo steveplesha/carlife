@@ -16,7 +16,9 @@ function handleFileSelect(evt) {
       // Set the file payload to Firebase and register an onComplete handler to stop the spinner and show the preview
       f.set(filePayload, function() { 
         //spinner.stop();
+        console.log('starting pano set function');
         document.getElementById("pano").src = e.target.result;
+        
         $('#file-upload').hide();
         // Update the location bar so the URL can be shared with others
         window.location.hash = hash;
@@ -38,7 +40,7 @@ $(function() {
     document.getElementById("file-upload").addEventListener('change', handleFileSelect, false);
   } else {
     // A hash was passed in, so let's retrieve and render it.
-    spinner.spin(document.getElementById('spin'));
+    //spinner.spin(document.getElementById('spin'));
     var f = new Firebase(firebaseRef + '/pano/' + hash + '/filePayload');
     f.once('value', function(snap) {
       var payload = snap.val();

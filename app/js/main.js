@@ -49,14 +49,22 @@
             console.log('authData before getAuth: ' + authData);
             var authData = myDataRef.getAuth();
             var currentUserRef = myDataRef.child('users').child(authData.uid);
-            //var vehicleRef = myDataRef.child('vehicles').push();
-            //var vehicleRefID = vehicleRef.name();
-            //var vehicleRef = myDataRef.child('users').child(authData.uid).child('vehicles');
-            //var sync = $firebase(vehicleRef);
-
-            //console.log("current user: " + currentUser);
-            //console.log("vehiclerefid: " + vehicleRefID);
+            var spinner = new Spinner({color: '#ddd'});
             var picture = "app/img/default-vehicle.png";
+
+            $scope.handleFileSelectAdd = function(evt) {
+                var f = evt.target.files[0];
+                var reader = new FileReader();
+                reader.onload = (function(theFile) {
+                    return function(e) {
+                        var filePayload = e.target.result;
+                        picture = e.target.result;
+                        document.getElementById('pano').src = picture;
+                    };
+                })(f);
+            reader.readAsDataURL(f);
+            };
+            document.getElementById('file-upload').addEventListener('change', $scope.handleFileSelectAdd, false);
 
             currentUserRef.child('vehicles').push({year: year, make: make, model: model, picture: picture, user: authData.uid});
             /*vehicleRef.push({
@@ -181,6 +189,8 @@
         var vehicleRef = myDataRef.child('users').child(authData.uid).child('vehicles')
         var sync = $firebase(ref);
         var id = $routeParams.id;
+        var spinner = new Spinner({color: '#ddd'});
+        
         console.log("id is " + id);
         //var carlist = ref.$asArray();
         ref.once('value', function(snap) {
@@ -193,11 +203,27 @@
         $scope.vehicle = carlist.$getRecord($routeParams.id);
         console.log($scope.vehicle);
         
+        $scope.handleFileSelectAdd = function(evt) {
+            var f = evt.target.files[0];
+            var reader = new FileReader();
+            reader.onload = (function(theFile) {
+                return function(e) {
+                    var filePayload = e.target.result;
+                    spinner.spin(document.getElementById('spin'));
+                    $scope.picture = e.target.result;
+                    document.getElementById('pano').src = $scope.picture;
+                    spinner.stop();
+                };
+            })(f);
+            reader.readAsDataURL(f);
+        };
+        document.getElementById('file-upload').addEventListener('change', $scope.handleFileSelectAdd, false);
+        
+        
         $scope.editCar = function(year, make, model) {
             console.log("start editcar function");
             console.log($scope.vehicle);
-            vehicleRef.child(id).update({year: year, make: make, model: model});
-            //$scope.$save();
+            vehicleRef.child(id).update({year: year, make: make, model: model, picture: $scope.picture});
             $location.path('/cars');
         };
 		
@@ -213,6 +239,8 @@
             console.log("End of addRepair function");
             $location.path('/cars');
         };
+        
+        
     }]);
 
 }())
