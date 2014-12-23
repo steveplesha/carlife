@@ -52,21 +52,6 @@
             var spinner = new Spinner({color: '#ddd'});
             $scope.picture = "app/img/default-vehicle.png";
 
-            $scope.handleFileSelectAdd = function(evt) {
-                var f = evt.target.files[0];
-                var reader = new FileReader();
-                reader.onload = (function(theFile) {
-                    return function(e) {
-                        var filePayload = e.target.result;
-                        $scope.picture = e.target.result;
-                        console.log("$scope.picture= " + $scope.picture);
-                        document.getElementById('pano').src = $source.picture;
-                    };
-                })(f);
-            reader.readAsDataURL(f);
-            };
-            document.getElementById('file-upload').addEventListener('change', $scope.handleFileSelectAdd, false);
-
             currentUserRef.child('vehicles').push({year: year, make: make, model: model, picture: $scope.picture, user: authData.uid});
             /*vehicleRef.push({
                 year: $scope.year,
@@ -79,6 +64,21 @@
             $location.path('/cars');
             
         };
+        
+        $scope.handleFileSelectAdd = function(evt) {
+            var f = evt.target.files[0];
+            var reader = new FileReader();
+            reader.onload = (function(theFile) {
+                return function(e) {
+                    var filePayload = e.target.result;
+                    $scope.picture = e.target.result;
+                    console.log("$scope.picture= " + $scope.picture);
+                    document.getElementById('pano').src = $source.picture;
+                };
+            })(f);
+        reader.readAsDataURL(f);
+        };
+        document.getElementById('file-upload').addEventListener('change', $scope.handleFileSelectAdd, false);        
         
         $scope.removeCar = function(car) {
             console.log("Starting removeCar");
