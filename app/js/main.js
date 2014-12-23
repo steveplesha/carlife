@@ -51,6 +51,7 @@
             var currentUserRef = myDataRef.child('users').child(authData.uid);
             var spinner = new Spinner({color: '#ddd'});
             $scope.picture = "app/img/default-vehicle.png";
+            document.getElementById('file-upload').addEventListener('change', $scope.handleFileSelectAdd, false);            
 
             currentUserRef.child('vehicles').push({year: year, make: make, model: model, picture: $scope.picture, user: authData.uid});
             /*vehicleRef.push({
@@ -77,8 +78,7 @@
                 };
             })(f);
         reader.readAsDataURL(f);
-        };
-        document.getElementById('file-upload').addEventListener('change', $scope.handleFileSelectAdd, false);        
+        };        
         
         $scope.removeCar = function(car) {
             console.log("Starting removeCar");
