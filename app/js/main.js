@@ -187,8 +187,6 @@
         var vehicleRef = myDataRef.child('users').child(authData.uid).child('vehicles')
         var sync = $firebase(ref);
         var id = $routeParams.id;
-        var car = $firebase(sync + id).$asArray();
-        $scope.car = car;
         var spinner = new Spinner({color: '#ddd'});
         
         console.log("id is " + id);
