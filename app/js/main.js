@@ -53,7 +53,7 @@
             $scope.picture = "app/img/default-vehicle.png";
             document.getElementById('file-upload').addEventListener('change', $scope.handleFileSelectAdd, false);            
 
-            currentUserRef.child('vehicles').push({year: year, make: make, model: model, picture: $scope.picture, user: authData.uid});
+            currentUserRef.child('vehicles').push({year: year, make: make, model: model, picture: $scope.picture});
             /*vehicleRef.push({
                 year: $scope.year,
                 make: $scope.make,
@@ -82,7 +82,7 @@
         
         $scope.removeCar = function(car) {
             console.log("Starting removeCar");
-            var authData = myDataRef.getAuth();
+            //var authData = myDataRef.getAuth();
             $scope.carlist.$remove(car);
         };
 
@@ -138,7 +138,6 @@
             console.log("third party login entered");
             myDataRef.authWithOAuthPopup(provider, function (error, authData) {
                 if (error === null) {
-                    console.log("user id: " + authData.uid + ", Provider: " + authData.provider);
                     $location.path('/cars');
                 } else {
                     alert("Error authenticating: ", error);
@@ -172,9 +171,7 @@
                 });
             
                 $scope.carlist = carlist;
- 
-                
-                
+
                 //console.log("cars assigned, carlist scope = " + $scope.carlist);
             } else {
                 $('.loginState').html("Not Logged In");
@@ -190,6 +187,8 @@
         var vehicleRef = myDataRef.child('users').child(authData.uid).child('vehicles')
         var sync = $firebase(ref);
         var id = $routeParams.id;
+        var car = $firebase(sync + id).$asArray();
+        $scope.car = car;
         var spinner = new Spinner({color: '#ddd'});
         
         console.log("id is " + id);
@@ -218,7 +217,7 @@
             })(f);
             reader.readAsDataURL(f);
         };
-        document.getElementById('file-upload').addEventListener('change', $scope.handleFileSelectAdd, false);
+        //document.getElementById('file-upload').addEventListener('change', $scope.handleFileSelectAdd, false);
         
         
         $scope.editCar = function(year, make, model) {
@@ -228,14 +227,16 @@
             $location.path('/cars');
         };
 		
-        $scope.addRepair = function(work, cost, mileage) {
+        $scope.addRepair = function(work, cost, shop, date, mileage) {
             console.log("Starting addRepair");
             console.log("scope.id: " + $scope.id);
             console.log("scope.id without $ on id:" + $scope.id);
             vehicleRef.child(id).child('repairs').push({
                 work: $scope.work,
                 cost: $scope.cost,
-                mileage: $scope.mileage
+                shop: $scope.shop,
+                date: $scope.date,
+                mileage: $scope.mileage,                
             });
             console.log("End of addRepair function");
             $location.path('/cars');
