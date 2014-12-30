@@ -14,7 +14,7 @@
                   controller: 'MainController'
               }).
               when('/cars', {
-                  templateUrl: 'app/partials/car-info.html',
+                  templateUrl: 'app/partials/carinfo.html',
                   controller: 'MainController'
               }).
               when('/register', {
@@ -22,7 +22,7 @@
                   controller: 'MainController'
               }).
               when('/addcar', {
-                  templateUrl: 'app/partials/add-car.html',
+                  templateUrl: 'app/partials/addcar.html',
                   controller: 'MainController'
               }).
               when('/editcar/:id', {
@@ -38,7 +38,7 @@
                   controller: 'EditCarController'
               }).
               when('/addrepair/:id', {
-                  templateUrl: 'app/partials/add-repair.html',
+                  templateUrl: 'app/partials/addrepair.html',
                   controller: 'EditCarController'
               }).
               otherwise({
@@ -175,10 +175,7 @@
                     console.log("list has " + carlist.length + " items");
                     console.log(carlist);
                 });
-            
                 $scope.carlist = carlist;
-
-                //console.log("cars assigned, carlist scope = " + $scope.carlist);
             } else {
                 $('.loginState').html("Not Logged In");
             }
@@ -206,6 +203,7 @@
         //console.log("carlist[routeparam] is " + carlist[$routeParams.id]);
         $scope.vehicle = carlist.$getRecord($routeParams.id);
         console.log($scope.vehicle);
+        var picture = $scope.vehicle.picture;
         
         $scope.handleFileSelectAdd = function(evt) {
             var f = evt.target.files[0];
@@ -214,8 +212,8 @@
                 spinner.spin(document.getElementById('spin'));
                 return function(e) {
                     var filePayload = e.target.result;
-                    $scope.picture = e.target.result;
-                    document.getElementById('pano').src = $scope.picture;
+                    picture = e.target.result;
+                    document.getElementById('pano').src = picture;
                     spinner.stop();
                 };
             })(f);
@@ -227,7 +225,7 @@
         $scope.editCar = function(year, make, model) {
             console.log("start editcar function");
             console.log($scope.vehicle);
-            vehicleRef.child(id).update({year: year, make: make, model: model, picture: $scope.picture});
+            vehicleRef.child(id).update({year: year, make: make, model: model, picture: picture});
             $location.path('/cars');
         };
 		
