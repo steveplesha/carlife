@@ -33,6 +33,10 @@
                   templateUrl: 'app/partials/login.html',
                   controller: 'MainController'
               }).
+              when('/repairs/:id', {
+                  templateUrl: 'app/partials/repairs.html',
+                  controller: 'EditCarController'
+              }).
               when('/addrepair/:id', {
                   templateUrl: 'app/partials/add-repair.html',
                   controller: 'EditCarController'
@@ -116,7 +120,6 @@
                 password : $scope.passwordLogin
             }, function (error, authData) {
                 if (error === null) {
-                    console.log("user id: " + authData.uid + ", Provider: " + authData.provider);
                     $location.path('/cars');
                 } else {
                     alert("Error authenticating: ", error);
@@ -125,7 +128,6 @@
         };
         
         $('.bt-social').on('click', function(e) { 
-        
             var $currentButton = $(this);
             var provider = $currentButton.data("provider");
             e.preventDefault();
@@ -137,8 +139,12 @@
         function thirdPartyLogin(provider) {
             console.log("third party login entered");
             myDataRef.authWithOAuthPopup(provider, function (error, authData) {
-                if (error === null) {
-                    $location.path('/cars');
+                if (error) {
+                    if (error.code === "TRANSPORT_UNAVAILABLE") {
+                        myDataRef.authWithOauthRedirect(provider, function (error, authData) {
+                            $location.path('/cars');
+                        });
+                    }
                 } else {
                     alert("Error authenticating: ", error);
                 }
@@ -238,6 +244,12 @@
             });
             console.log("End of addRepair function");
             $location.path('/cars');
+        };
+        
+        $scope.removeRepair = function(repair) {
+            console.log("Starting removeRepair");
+            //var authData = myDataRef.getAuth();
+            $scope.vehicle.repairs.$remove(repair);
         };
         
         

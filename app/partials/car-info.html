@@ -1,18 +1,11 @@
 <h1>Vehicles</h1>
 <div class="car-item" ng-repeat="car in carlist"> 
     <h1>{{ car.year }} {{ car.make }} {{ car.model }}</h1>
-    <img class="car-image" ng-src="{{ car.picture }}"/>
-    <h2>Work done</h2>
-    <div ng-repeat="repair in car.repairs">
-        <p>Job: {{ repair.work }}</p>
-        <p>Mileage when work done: {{ repair.mileage }}</p>
-        <p>Cost: {{ repair.cost | currency }}</p>
-    </div>
-    
+    <img class="car-image" ng-src="{{ car.picture }}"/>    
     <div>
        <ul>
            <li><a href='/editcar/{{car.$id}}'>Edit car details</a></li>
-           <li><a href="/addrepair/{{car.$id}}" >Add a repair entry</a></li>          
+           <li><a href="/repairs/{{car.$id}}" >Repairs List</a></li>          
            <li><a href='#' ng-click="removeCar(car)">Delete this car</a></li>
         </ul>
     </div>
