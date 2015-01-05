@@ -117,6 +117,9 @@ main { padding: 15px 0 100px 15px; }
 
 .login-state { padding-right: 20px; }
 
+.car-image-preview { width: 200px; }
+    
+
 @font-face {
   font-family: 'Glyphicons Halflings';
 

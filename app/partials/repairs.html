@@ -1,7 +1,8 @@
 
 <h1>{{ vehicle.year }} {{ vehicle.make }} {{ vehicle.model }}</h1>
+<img class="car-image-preview" src="{{vehicle.picture}}">
 <h2>Repairs</h2>
-<div ng-repeat="repair in vehicle.repairs"> 
+<div ng-repeat="repair in repairlist"> 
     <ul>
         <li><h3>Job: {{ repair.work }}</h3></li>
         <li>Cost: {{ repair.cost | currency }}</li>        
@@ -12,3 +13,4 @@
     </ul>
 </div>
 <button type="button"><a href="/addrepair/{{vehicle.$id}}" >Add a repair</a></button>
+<div id="file-upload"></div>
