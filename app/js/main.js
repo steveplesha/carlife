@@ -48,7 +48,9 @@
     
     
     app.controller("MainController", ["$scope", "$firebase", "$location", "$routeParams", function($scope, $firebase, $location, $routeParams) {
-        
+        $scope.isActive = function(route) {
+        return route === $location.path();
+    }
         $scope.handleFileSelectAdd = function(evt) {
             console.log("starting main controller handle file select");
             var f = evt.target.files[0];
@@ -57,14 +59,17 @@
                 return function(e) {
                     var filePayload = e.target.result;
                     picture = e.target.result;
-                    $scope.console.log("picture= " + $scope.picture);
                     document.getElementById('pano').src = $scope.picture;
                 };
             })(f);
         reader.readAsDataURL(f);
-        };      
-        document.getElementById('file-upload').addEventListener('change', $scope.handleFileSelectAdd, false);
-        
+        };  
+
+        var uploadEl = document.getElementById('file-upload');
+        if(uploadEl) {        
+            uploadEl.addEventListener('change', $scope.handleFileSelectAdd, false);
+        }
+            
         $scope.addCar = function(year, make, model) {
             var authData = myDataRef.getAuth();
             var currentUserRef = myDataRef.child('users').child(authData.uid);
@@ -158,18 +163,14 @@
         
         myDataRef.onAuth(function(authData) {
             if (authData) {
-                $('.login-state').html("Logged In");
                 $scope.authData = authData;
+                console.log(authData);
+                $('.login-state').html("Logged In");
                 var userRef = new Firebase(myDataRef + '/users/' + authData.uid);       
                 var userVehicleRef = new Firebase(myDataRef + '/users/' + authData.uid + '/vehicles');
                 var sync = $firebase(userVehicleRef);
                 carlist = sync.$asArray();
-                /*    
-                carlist.$loaded().then(function() {
-                    console.log("list has " + carlist.length + " items");
-                    console.log(carlist);
-                });
-                */
+
                 $scope.carlist = carlist;
             } else {
                 $('.loginState').html("Not Logged In");
@@ -187,6 +188,9 @@
         var id = $routeParams.id;
         var spinner = new Spinner({color: '#ddd'});
               
+        $scope.isActive = function(route) {
+        return route === $location.path();
+    }
         var repairRef = new Firebase(myDataRef + '/users/' + authData.uid + '/vehicles/' + id + '/repairs/');
         var sync = $firebase(repairRef);
         repairlist = sync.$asArray();    
@@ -197,9 +201,7 @@
             var carlist = snap.val();
         });
         $scope.vehicle = carlist.$getRecord($routeParams.id);
-        console.log($scope.vehicle);
         var picture = $scope.vehicle.picture;
-        console.log(picture);
         
         $scope.handleFileSelectAdd = function(evt) {
             console.log("starting edit car controller handle file select");            
@@ -216,8 +218,11 @@
             })(f);
             reader.readAsDataURL(f);
         };
-        document.getElementById('file-upload').addEventListener('change', $scope.handleFileSelectAdd, false);
         
+        var uploadEl = document.getElementById('file-upload');
+        if(uploadEl) {
+            uploadEl.addEventListener('change', $scope.handleFileSelectAdd, false);
+        }
         
         $scope.editCar = function(year, make, model) {
             console.log("start editcar function");
@@ -244,10 +249,6 @@
         
         $scope.removeRepair = function(repair) {
             console.log("Starting removeRepair");
-            /*var repairRef = new Firebase(myDataRef + '/users/' + authData.uid + '/vehicles/' + id + '/repairs/');
-            var removeRef = repairRef.child(repair);
-            removeRef.remove();
-            */
             $scope.repairlist.$remove(repair);     
         };
         

@@ -1,6 +1,6 @@
 <h1>Vehicles</h1>
 <div class="car-item" ng-repeat="car in carlist"> 
-    <h1>{{ car.year }} {{ car.make }} {{ car.model }}</h1>
+    <h1 class="car-item-title">{{ car.year }} {{ car.make }} {{ car.model }}</h1>
     <img class="car-image" ng-src="{{ car.picture }}"/>    
     <div>
        <ul>
@@ -10,4 +10,4 @@
         </ul>
     </div>
 </div>
-<div id="file-upload"></div>
+

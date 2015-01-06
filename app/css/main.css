@@ -97,15 +97,23 @@ textarea {
    Author's custom styles
    ========================================================================== */
 
-main { padding: 15px 0 100px 15px; }
+body { background-image: url('../img/carbon.jpg'); }
+
+main { 
+    padding: 15px 0 100px 15px; 
+    color: #fff;
+}
 
 .car-item {
-    border: 1px solid rgb( 0, 0, 0 );
     padding: 20px;
     margin-right: 20px;
     margin-bottom: 25px;
     width: 30%;
     display: inline-block;
+}
+
+.car-item-title {
+    text-align: center;
 }
 
 .car-image {
