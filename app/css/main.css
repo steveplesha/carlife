@@ -100,26 +100,26 @@ textarea {
 body { background-image: url('../img/carbon.jpg'); }
 
 main { 
-    padding: 15px 0 100px 15px; 
+    padding: 100px 0 100px 15px; 
     color: #fff;
+    
 }
 
 .main-nav { 
     background-color: black; 
-    width:  120px;
+    width: 83px;
     position: fixed;
     left: 0;
     top: 0;
     height: 100%;
-    overflow: hidden;
 }
 
-.main-nav ul { width: 120px; }
+.main-nav ul { width: 83px; }
 
 li { list-style: none; }
 
 .main-nav ul .selected { 
-    width: 135px;
+    width: 90px;
     background-color: white;
 }
 
@@ -132,6 +132,11 @@ li { list-style: none; }
     background-color: rgb(100, 100, 105);
     padding: 20px;    
     border-radius: 10px;
+}
+
+.carlist {
+    background-color: rgb(87, 56, 56);
+    border-radius: 50%;
 }
 
 .car-item {
@@ -155,6 +160,7 @@ li { list-style: none; }
 
 .login-state { 
     padding-right: 20px; 
+    padding-top: 20px;
     color: white;
 }
 
@@ -172,16 +178,24 @@ li { list-style: none; }
 footer {
     background-color: rgb( 68, 123, 168 );
     color: rgb( 255, 255, 255 );   
-    padding: 50px 100px;
+    padding: 50px 0 50px 183px;
 }
 
-.bt-social { color: rgb( 255, 255, 255 ); }
+.bt-social { 
+    color: rgb( 255, 255, 255 ); 
+    margin-right:10px;
+}
+
+.bt-social:hover { color: white; }
 
 .facebook-btn { background-color: rgb(58, 136, 181); }
+.facebook-btn:hover { background-color: rgb(30, 99, 141); }
 
 .google-btn { background-color: rgb(209, 59, 59); }
+.google-btn:hover { background-color: rgb(147, 40, 40); }
 
 .github-btn { background-color: rgb(103, 97, 97); }
+.github-btn:hover { background-color: rgb(67, 57, 57); }
 
 .hiddenpano { display: none; }
 
