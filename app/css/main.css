@@ -104,6 +104,36 @@ main {
     color: #fff;
 }
 
+.main-nav { 
+    background-color: black; 
+    width:  120px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    overflow: hidden;
+}
+
+.main-nav ul { width: 120px; }
+
+li { list-style: none; }
+
+.main-nav ul .selected { 
+    width: 135px;
+    background-color: white;
+}
+
+.main-nav ul li.selected { color: black; }
+
+.center-form {
+    display: block;
+    margin: 0 auto;
+    width: 50%;
+    background-color: rgb(100, 100, 105);
+    padding: 20px;    
+    border-radius: 10px;
+}
+
 .car-item {
     padding: 20px;
     margin-right: 20px;
@@ -123,7 +153,10 @@ main {
     display: block;
 }
 
-.login-state { padding-right: 20px; }
+.login-state { 
+    padding-right: 20px; 
+    color: white;
+}
 
 .car-image-preview { width: 200px; }
     

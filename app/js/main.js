@@ -189,8 +189,8 @@
         var spinner = new Spinner({color: '#ddd'});
               
         $scope.isActive = function(route) {
-        return route === $location.path();
-    }
+            return route === $location.path();
+        }
         var repairRef = new Firebase(myDataRef + '/users/' + authData.uid + '/vehicles/' + id + '/repairs/');
         var sync = $firebase(repairRef);
         repairlist = sync.$asArray();    
