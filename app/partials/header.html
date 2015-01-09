@@ -1,11 +1,11 @@
 <div class="main-nav" ng-controller="MainController">
     <ul class="nav">
-        <li class="active"><a class="brand" href="#">CarLife</a></li>
-        <li ng-show="authData" ng-class="{selected:isActive('/cars')}"><a href="/cars">Your Cars</a></li>
-        <li ng-hide="authData" ng-class="{selected:isActive('/login')}"><a href="/login">Login</a></li>
-        <li ng-hide="authData" ng-class="{selected:isActive('/register')}"><a href="/register">Register</a></li>
-        <li ng-show="authData" ng-class="{selected:isActive('/addcar')}"><a href="/addcar">Add car</a></li>
-        <li ng-show="authData"><a href="/" class="btnLogout" ng-click="logout()">Logout</a></li>
+        <li class="active"><a class="brand" href="/">CarLife</a></li>
+        <li ng-show="authData" ng-class="{selected:isActive('/cars')}"><a href="/cars"><img src="app/img/car.png">Your Cars</a></li>
+        <li ng-hide="authData" ng-class="{selected:isActive('/login')}"><a href="/login"><img src="app/img/login.png" class="nav-image">Login</a></li>
+        <li ng-hide="authData" ng-class="{selected:isActive('/register')}"><a href="/register"><img src="app/img/register.png" class="nav-image">Register</a></li>
+        <li ng-show="authData" ng-class="{selected:isActive('/addcar')}"><a href="/addcar"><img src="app/img/plus.png">Add car</a></li>
+        <li ng-show="authData"><a href="/" class="btnLogout" ng-click="logout()"><img src="app/img/logout.png">Logout</a></li>
     </ul>
 </div>
 <div class="pull-right login-state"><span>Not logged in</span></div>

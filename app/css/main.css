@@ -106,13 +106,16 @@ main {
 }
 
 .main-nav { 
-    background-color: black; 
+    background-color: #222; 
     width: 83px;
     position: fixed;
     left: 0;
     top: 0;
     height: 100%;
+    text-align: center;
 }
+
+.main-nav a { color: #aaa; }
 
 .main-nav ul { width: 83px; }
 
@@ -123,7 +126,7 @@ li { list-style: none; }
     background-color: white;
 }
 
-.main-nav ul li.selected { color: black; }
+.nav>li>a>img { max-width: 100%; }
 
 .center-form {
     display: block;
@@ -164,7 +167,10 @@ li { list-style: none; }
     color: white;
 }
 
-.car-image-preview { width: 200px; }
+.car-image-preview { 
+    width: 200px;
+    border: 1px solid black;
+}
     
 
 @font-face {
