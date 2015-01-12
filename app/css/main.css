@@ -102,7 +102,6 @@ body { background-image: url('../img/carbon.jpg'); }
 main { 
     padding: 100px 0 100px 15px; 
     color: #fff;
-    
 }
 
 .main-nav { 
@@ -161,6 +160,10 @@ li { list-style: none; }
     display: block;
 }
 
+.delete-link {
+    background-color: #F49999;
+}
+
 .login-state { 
     padding-right: 20px; 
     padding-top: 20px;
@@ -199,6 +202,9 @@ footer {
 
 .google-btn { background-color: rgb(209, 59, 59); }
 .google-btn:hover { background-color: rgb(147, 40, 40); }
+
+.twitter-btn { background-color: rgb(26, 189, 252); }
+.twitter-btn:hover { background-color: rgb(16, 146, 196); }
 
 .github-btn { background-color: rgb(103, 97, 97); }
 .github-btn:hover { background-color: rgb(67, 57, 57); }

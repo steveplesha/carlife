@@ -3,17 +3,14 @@
     <div class="car-item" ng-repeat="car in carlist" ng-animate="{enter: 'animate-enter', leave: 'animate-leave'}"> 
         <h1 class="car-item-title">{{ car.year }} {{ car.make }} {{ car.model }}</h1>
         <img class="car-image" ng-src="{{ car.picture }}"/>    
-        <div>
-           <ul class="nav nav-pills">
-               <li class="dropdown">
-                   <a class="dropdown-toggle" data-toggle="dropdown" href="#">Actions</a>
-                   <ul class="dropdown-menu">
-                       <li><a href='/editcar/{{car.$id}}'>Edit Car Info/Picture</a></li>
-                       <li><a href="/repairs/{{car.$id}}" >Show Repairs List</a></li>          
-                       <li><a href='#' ng-click="removeCar(car)">Delete This Car</a></li>
-                   </ul>
-               </li>
-            </ul>
+        <div class="dropdown">
+           <button class="dropdown btn btn-primary" type="button" data-toggle="dropdown" href="#">Actions<span class="caret"></span></button>
+               <ul class="dropdown-menu">
+                   <li><a href='/editcar/{{car.$id}}'>Edit Car Info/Picture</a></li>
+                   <li><a href="/repairs/{{car.$id}}" >Show Repairs List</a></li>          
+                   <li><a href='#' class="delete-link" ng-click="removeCar(car)">Delete This Car</a></li>
+               </ul>
+           </button>
         </div>
     </div>
 </div>

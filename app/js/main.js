@@ -41,6 +41,10 @@
                   templateUrl: 'app/partials/addrepair.html',
                   controller: 'EditCarController'
               }).
+              when('/passwordreset', {
+                  templateUrl: 'app/partials/pwreset.html',
+                  controller: 'MainController'
+              }).
               otherwise({
                   redirectTo: 'app/index.html'
               });
@@ -110,7 +114,7 @@
                         $location.path('/');
                     })
                 } else { 
-                    console.log("error creating user:", error);
+                    $(".message").append("<div>That username is already taken!</div>");
                 }
             });
         }; 
@@ -150,7 +154,21 @@
                     alert("Error authenticating: ", error);
                 }
             });
+            $location.path('/login');
         };
+        
+        $scope.pwreset = function() { 
+            myDataRef.resetPassword({
+                email: $scope.resetEmail
+            }, function(error) {
+                if (error === null) {
+                    console.log("Password reset email sent successfully");
+                } else {
+                    console.log("Error sending password reset email: ", error);
+                }
+            });
+        };
+            
                     
         $scope.logout = function() {
             myDataRef.unauth();
