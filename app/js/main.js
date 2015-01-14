@@ -114,7 +114,7 @@
                         $location.path('/');
                     })
                 } else { 
-                    $(".message").append("<div>That username is already taken!</div>");
+                    $(".message").show().fadeOut(10000);
                 }
             });
         }; 
@@ -251,9 +251,6 @@
         };
 		
         $scope.addRepair = function(work, cost, shop, date, mileage) {
-            console.log("Starting addRepair");
-            console.log("scope.id: " + $scope.id);
-            console.log("scope.id without $ on id:" + $scope.id);
             vehicleRef.child(id).child('repairs').push({
                 work: $scope.work,
                 cost: $scope.cost,
@@ -261,7 +258,6 @@
                 date: $scope.date,
                 mileage: $scope.mileage,                
             });
-            console.log("End of addRepair function");
             $location.path('/repairs/' + id);
         };
         

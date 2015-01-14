@@ -4,12 +4,12 @@
 <h2>Repairs</h2>
 <div ng-repeat="repair in repairlist"> 
     <ul>
-        <li><h3>Job: {{ repair.work }}</h3></li>
+        <li><h2>Job: {{ repair.work }}</h2></li>
         <li>Cost: {{ repair.cost | currency }}</li>        
         <li>Repair Shop: {{ repair.shop }}</li>
         <li>Date of work: {{ repair.date }}</li>
         <li>Mileage when work done: {{ repair.mileage }}</li>
-        <li><button type="button" class="btn btn-danger" ng-click="removeRepair(repair)">Delete this repair</button></li>
+        <li><button type="button" class="btn btn-danger delete-button" ng-click="removeRepair(repair)">Delete this repair</button></li>
     </ul>
 </div>
 <a href="/addrepair/{{vehicle.$id}}" ><button type="button" class="btn btn-primary">Add a repair</button></a>

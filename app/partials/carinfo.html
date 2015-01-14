@@ -4,11 +4,17 @@
         <h1 class="car-item-title">{{ car.year }} {{ car.make }} {{ car.model }}</h1>
         <img class="car-image" ng-src="{{ car.picture }}"/>    
         <div class="dropdown">
-           <button class="dropdown btn btn-primary" type="button" data-toggle="dropdown" href="#">Actions<span class="caret"></span></button>
+           <button class="dropdown btn btn-car-item" type="button" data-toggle="dropdown" href="#">Actions <span class="caret"></span></button>
                <ul class="dropdown-menu">
-                   <li><a href='/editcar/{{car.$id}}'>Edit Car Info/Picture</a></li>
-                   <li><a href="/repairs/{{car.$id}}" >Show Repairs List</a></li>          
-                   <li><a href='#' class="delete-link" ng-click="removeCar(car)">Delete This Car</a></li>
+                   <li>
+                       <a href='/editcar/{{car.$id}}'>Edit Car Info/Picture</a>
+                    </li>
+                   <li>
+                       <a href="/repairs/{{car.$id}}" >Show Repairs List</a>
+                   </li>          
+                   <li>
+                       <a href='#' class="delete-link" ng-click="removeCar(car)">Delete This Car</a>
+                   </li>
                </ul>
            </button>
         </div>

@@ -131,7 +131,7 @@ li { list-style: none; }
     display: block;
     margin: 0 auto;
     width: 50%;
-    background-color: rgb(100, 100, 105);
+    background-color: rgb(27, 27, 27);
     padding: 20px;    
     border-radius: 10px;
 }
@@ -155,13 +155,38 @@ li { list-style: none; }
 
 .car-image {
     max-width: 100%;
+    height: 200px;
     border: 1px solid rgb( 0, 0, 0 );
-    margin: 0 auto;
+    margin: 0 auto 10px auto;
     display: block;
+}
+
+.btn-car-item {
+    border: 1px solid rgb( 255, 255, 255 );
+    background-color: rgba( 0, 0, 0, 0);
+    color: rgb( 255, 255, 255 );
+    transition: all .2s linear;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: bold;
+    font-size: 12px;
+    padding: 10px 25px;
+}
+
+.btn-car-item:hover,
+.btn-car-item:focus,
+.btn-car-item:active {
+    background-color: rgb( 255, 255, 255 );
+    border: 1px solid rgb( 255, 255, 255 );
+    color: rgb( 0, 0, 0 );
 }
 
 .delete-link {
     background-color: #F49999;
+}
+
+.delete-button { 
+    margin-top: 5px;
 }
 
 .login-state { 
@@ -208,6 +233,23 @@ footer {
 
 .github-btn { background-color: rgb(103, 97, 97); }
 .github-btn:hover { background-color: rgb(67, 57, 57); }
+
+.forgot-password {
+    margin-top:10px;
+}
+
+.message {
+    position: absolute;
+    top: 20px;
+    left: 40%;
+    background-color: #ff8080;
+    border-radius: 4px;
+    padding: 10px 20px;
+}
+
+.forgot-password a {
+    color: rgb(255, 255, 255);
+}
 
 .hiddenpano { display: none; }
 
