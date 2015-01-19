@@ -136,9 +136,17 @@ li { list-style: none; }
     border-radius: 10px;
 }
 
+input[type=file] {
+    background-color: rgb( 255, 255, 255 ) ;
+}
+    
 .carlist {
     background-color: rgb(87, 56, 56);
     border-radius: 50%;
+}
+
+.btn-margin {
+    margin-right: 10px;
 }
 
 .car-item {
