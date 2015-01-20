@@ -114,7 +114,7 @@
                         $location.path('/');
                     })
                 } else { 
-                    $(".message").show().fadeOut(10000);
+                    $(".message").show().html(error).fadeOut(5000);
                 }
             });
         }; 
@@ -127,7 +127,7 @@
                 if (error === null) {
                     $location.path('/cars');
                 } else {
-                    alert("Error authenticating: ", error);
+                    $(".message").show().html(error).fadeOut(5000);
                 }
             });
         };
@@ -174,9 +174,8 @@
             myDataRef.unauth();
             $scope.authData = "";
             $('.login-state').html("Not logged in");
-            alert("You are logged out");
-			console.log("User logged out");
             $location.path('/');
+            $(".message").show().html("You are logged out").fadeOut(5000);
         };
         
         myDataRef.onAuth(function(authData) {

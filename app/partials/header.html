@@ -4,8 +4,9 @@
             <a class="brand" href="/">CarLife</a>
         </li>
         <li ng-show="authData" ng-class="{selected:isActive('/cars')}">
-            <a href="/cars"><img src="app/img/car.png">
+            <a href="/cars">
                 <span>Your Cars</span>
+                <img src="app/img/car.png">
             </a>
         </li>
         <li ng-hide="authData" ng-class="{selected:isActive('/login')}">

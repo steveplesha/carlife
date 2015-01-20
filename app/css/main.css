@@ -96,12 +96,20 @@ textarea {
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
+body, html { height: 100%; }
 
-body { background-image: url('../img/carbon.jpg'); }
 
 main { 
+    background-image: /* Apply a bit of white filter to bkg image to aid in button text visibility */
+        linear-gradient(
+            rgba(0, 0, 0, 0.3),
+            rgba(0, 0, 0, 0.3)
+        ),
+        url('../img/highway.png'); 
+    background-size: cover;
     padding: 100px 0 100px 15px; 
-    color: #fff;
+    min-height: 100%;
+    color: rgb(255, 255, 255);
 }
 
 .main-nav { 
@@ -118,6 +126,8 @@ main {
 
 .main-nav ul { width: 83px; }
 
+.main-nav ul li { border-bottom: 1px solid rgb(79, 79, 79); }
+
 li { list-style: none; }
 
 .main-nav ul .selected { 
@@ -131,18 +141,14 @@ li { list-style: none; }
     display: block;
     margin: 0 auto;
     width: 50%;
-    background-color: rgb(27, 27, 27);
+    background-color: rgba(27, 27, 27, .5);
     padding: 20px;    
     border-radius: 10px;
+    color: rgb(255, 255, 255);
 }
 
 input[type=file] {
     background-color: rgb( 255, 255, 255 ) ;
-}
-    
-.carlist {
-    background-color: rgb(87, 56, 56);
-    border-radius: 50%;
 }
 
 .btn-margin {
@@ -164,13 +170,13 @@ input[type=file] {
 .car-image {
     max-width: 100%;
     height: 200px;
-    border: 1px solid rgb( 0, 0, 0 );
+    box-shadow: 0 0 15px black;
     margin: 0 auto 10px auto;
     display: block;
 }
 
 .btn-car-item {
-    border: 1px solid rgb( 255, 255, 255 );
+    border: 1px solid rgb(255, 255, 255);
     background-color: rgba( 0, 0, 0, 0);
     color: rgb( 255, 255, 255 );
     transition: all .2s linear;
@@ -185,8 +191,8 @@ input[type=file] {
 .btn-car-item:focus,
 .btn-car-item:active {
     background-color: rgb( 255, 255, 255 );
-    border: 1px solid rgb( 255, 255, 255 );
     color: rgb( 0, 0, 0 );
+    border: 1px solid rgb( 0, 0, 0 );
 }
 
 .delete-link {
@@ -218,9 +224,9 @@ input[type=file] {
 
 
 footer {
-    background-color: rgb( 68, 123, 168 );
+    background-color: rgba(26, 26, 26, 1);
     color: rgb( 255, 255, 255 );   
-    padding: 50px 0 50px 183px;
+    padding: 10px 0 10px 183px;
 }
 
 .bt-social { 
@@ -253,6 +259,7 @@ footer {
     background-color: #ff8080;
     border-radius: 4px;
     padding: 10px 20px;
+    display: none;
 }
 
 .forgot-password a {
