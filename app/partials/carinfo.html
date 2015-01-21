@@ -1,5 +1,4 @@
 <div class="carlist">
-    <h1>Vehicles</h1>
     <div class="car-item" ng-repeat="car in carlist" ng-animate="{enter: 'animate-enter', leave: 'animate-leave'}"> 
         <h1 class="car-item-title">{{ car.year }} {{ car.make }} {{ car.model }}</h1>
         <img class="car-image" ng-src="{{ car.picture }}"/>    

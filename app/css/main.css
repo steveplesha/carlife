@@ -160,11 +160,19 @@ main {
 
 .main-nav a { color: #aaa; }
 
-.main-nav ul { width: 200px; }
+.main-nav ul { 
+    width: 200px; 
+}
 
 .main-nav ul li { border-bottom: 1px solid rgb(79, 79, 79); }
 
 li { list-style: none; }
+
+.menu-label {
+    text-align: left;
+    color: rgb( 255, 255, 255 );
+    padding-left: 8px;
+}
 
 .main-nav ul .selected { 
     width: 210px;
