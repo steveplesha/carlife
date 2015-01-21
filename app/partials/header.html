@@ -1,12 +1,15 @@
 <div class="main-nav" ng-controller="MainController">
     <ul class="nav">
         <li class="active">
-            <a class="brand" href="/">CarLife</a>
+            <a href="/">
+                <span>CarLife</span>    
+                <img src="app/img/home.png" class="nav-image">
+            </a>
         </li>
         <li ng-show="authData" ng-class="{selected:isActive('/cars')}">
             <a href="/cars">
                 <span>Your Cars</span>
-                <img src="app/img/car.png">
+                <img src="app/img/car.png" class="nav-image">
             </a>
         </li>
         <li ng-hide="authData" ng-class="{selected:isActive('/login')}">
@@ -30,7 +33,7 @@
         <li ng-show="authData">
             <a href="/" class="btnLogout" ng-click="logout()">
                 <span>Logout</span>
-                <img src="app/img/logout.png">
+                <img src="app/img/logout.png" class="nav-image">
             </a>
         </li>
     </ul>
