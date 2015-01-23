@@ -26,9 +26,10 @@
         <header ng-include src="'app/partials/header.html'" ></header>
         
         <main>
-            <div class="message"></div>
-            <div class="spacer"></div>
-            <div class="container" ng-view></div>
+            <div class="content">
+                <div class="message"></div>
+                <div class="container" ng-view></div>
+            </div>
         </main>
         
         <footer ng-include src="'app/partials/footer.html'" ></footer>
@@ -54,6 +55,7 @@
     <script src="//cdn.firebase.com/libs/angularfire/0.8.2/angularfire.min.js"></script>        
     <script src="app/js/plugins.js"></script>
     <script src="app/js/main.js"></script>
+
     <script src="app/js/vendor/modernizr-2.6.2.min.js"></script>
     <script src="app/js/spin.min.js"></script>
     </body>

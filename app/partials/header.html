@@ -1,42 +1,43 @@
 <div class="main-nav" ng-controller="MainController">
     <ul class="nav">
-       <li class="menu-label">Menu</li>
+        <li class="menu-label">Menu</li>
         <li>
-            <a href="/">
+            <a href="/" ng-class="{selected:isActive('/')}">
                 <span>CarLife Home</span>    
-                <img src="app/img/home-light.png" class="nav-image">
+                <i class="nav-image home-icon"></i>
             </a>
         </li>
         <li ng-show="authData" ng-class="{selected:isActive('/cars')}">
             <a href="/cars">
                 <span>Your Cars</span>
-                <img src="app/img/car-light.png" class="nav-image">
+                <i class="nav-image car-icon"></i>
             </a>
         </li>
         <li ng-hide="authData" ng-class="{selected:isActive('/login')}">
             <a href="/login">
                 <span>Login</span>
-                <img src="app/img/login-light.png" class="nav-image">
+                <i class="nav-image login-icon"></i>
             </a>
         </li>
         <li ng-hide="authData" ng-class="{selected:isActive('/register')}">
             <a href="/register">
                 <span>Register</span>
-                <img src="app/img/register-light.png" class="nav-image">
+                <i class="nav-image register-icon"></i>
             </a>
         </li>
         <li ng-show="authData" ng-class="{selected:isActive('/addcar')}">
             <a href="/addcar">
                 <span>Add Car</span>
-                <img src="app/img/plus-light.png" class="nav-image">
+                <i class="nav-image add-car-icon"></i>
             </a>
         </li>
         <li ng-show="authData">
             <a href="/" class="btnLogout" ng-click="logout()">
                 <span>Logout</span>
-                <img src="app/img/logout-light.png" class="nav-image">
+                <i class="nav-image logout-icon"></i>
             </a>
         </li>
     </ul>
 </div>
 <div class="pull-right login-state"><span>Not logged in</span></div>
+

@@ -107,14 +107,29 @@ main {
         ),
         url('../img/highway.png'); 
     background-size: cover;
-    padding: 100px 0 100px 200px; 
+    padding: 100px 0 100px 0; 
     min-height: 100%;
     color: rgb(255, 255, 255);
 }
 
+.expanded main { 
+    padding-left: 200px; 
+}
+
+.content {
+           -moz-transition: width ease-in-out 0.28s, background linear 0.1s;
+    -webkit-transition: width ease-in-out 0.28s, background linear 0.1s;
+         -o-transition: width ease-in-out 0.28s, background linear 0.1s;
+            transition: width ease-in-out 0.28s, background linear 0.1s;
+        -ms-transform: translate(0px, 0);
+       -moz-transform: translate(0px, 0);
+    -webkit-transform: translate3d(0px, 0, 0);
+            transform: translate(0px, 0);
+}
+
 .main-nav { 
     background-color: #222; 
-    width: 52px;
+    width: 53px;
     position: fixed;
     left: 0;
     top: 0;
@@ -123,19 +138,20 @@ main {
     overflow: hidden;
     overflow-x: hidden;
     overflow-y: auto;
-    -moz-transition: width ease-in-out 0.28s, background linear 0.1s;
+       -moz-transition: width ease-in-out 0.28s, background linear 0.1s;
     -webkit-transition: width ease-in-out 0.28s, background linear 0.1s;
-    -o-transition: width ease-in-out 0.28s, background linear 0.1s;
-    transition: width ease-in-out 0.28s, background linear 0.1s;
-    -ms-transform: translate(0px, 0);
-    -moz-transform: translate(0px, 0);
+         -o-transition: width ease-in-out 0.28s, background linear 0.1s;
+            transition: width ease-in-out 0.28s, background linear 0.1s;
+        -ms-transform: translate(0px, 0);
+       -moz-transform: translate(0px, 0);
     -webkit-transform: translate3d(0px, 0, 0);
-    transform: translate(0px, 0);
+            transform: translate(0px, 0);
 }
 
-.main-nav:hover { width: 200px; }
+.expanded .main-nav { width: 200px; }
 
 .main-nav .nav-image {
+    background-image: url("../img/icons.png");
     display: block;
     position: absolute;
     top: 12px;
@@ -145,6 +161,24 @@ main {
     overflow: hidden;
     opacity: 1.0;
 }
+
+.home-icon { background-position: 0 -40px; }
+.selected .home-icon { background-position: -40px -40px; }
+
+.car-icon { background-position: 0 0; }
+.selected .car-icon { background-position: -40px 0; }
+
+.login-icon { background-position: -80px -80px; }
+.selected .login-icon { background-position: -120px -80px; }
+
+.logout-icon { background-position: 0 -120px; }
+.selected .logout-icon { background-position: -40px -120px; }
+
+.register-icon { background-position: 0 -80px; }
+.selected .register-icon { background-position: -40px -80px; }
+
+.add-car-icon { background-position: -80px -40px; }
+.selected .add-car-icon { background-position: -120px -40px; }
 
 .main-nav li a {
   display: block;
@@ -162,6 +196,7 @@ main {
 
 .main-nav ul { 
     width: 200px; 
+    padding-left: 0;
 }
 
 .main-nav ul li { border-bottom: 1px solid rgb(79, 79, 79); }
@@ -170,14 +205,11 @@ li { list-style: none; }
 
 .menu-label {
     text-align: left;
-    color: rgb( 255, 255, 255 );
+    color: rgb(170, 170, 170);
     padding-left: 8px;
 }
 
-.main-nav ul .selected { 
-    width: 210px;
-    background-color: white;
-}
+.main-nav ul .selected { background-color: rgb(170, 170, 170); }
 
 .main-nav ul li a:hover { color: rgb( 0, 0, 0 ); }
 
@@ -195,13 +227,9 @@ li { list-style: none; }
     color: rgb(255, 255, 255);
 }
 
-input[type=file] {
-    background-color: rgb( 255, 255, 255 ) ;
-}
+input[type=file] { background-color: rgb( 255, 255, 255 ); }
 
-.btn-margin {
-    margin-right: 10px;
-}
+.btn-margin { margin-right: 10px; }
 
 .car-item {
     padding: 20px;
@@ -209,6 +237,8 @@ input[type=file] {
     margin-bottom: 25px;
     width: 30%;
     display: inline-block;
+    background-color: rgba(27, 27, 27, .5);
+    border-radius: 5px;
 }
 
 .car-item-title {
@@ -270,13 +300,6 @@ input[type=file] {
   src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
 }
 
-
-footer {
-    background-color: rgba(26, 26, 26, 1);
-    color: rgb( 255, 255, 255 );   
-    padding: 10px 0 10px 183px;
-}
-
 .bt-social { 
     color: rgb( 255, 255, 255 ); 
     margin-right:10px;
@@ -296,17 +319,15 @@ footer {
 .github-btn { background-color: rgb(103, 97, 97); }
 .github-btn:hover { background-color: rgb(67, 57, 57); }
 
-.forgot-password {
-    margin-top:10px;
-}
+.forgot-password { margin-top:10px; }
 
 .message {
     position: absolute;
     top: 20px;
-    left: 40%;
+    left: 38%;
     background-color: #ff8080;
     border-radius: 4px;
-    padding: 10px 50px;
+    padding: 10px 100px;
     display: none;
 }
 
@@ -322,6 +343,12 @@ footer {
 }
 
 #spin { height: 60px; }
+
+footer {
+    background-color: rgba(26, 26, 26, 1);
+    color: rgb( 255, 255, 255 );   
+    padding: 10px 0 10px 183px;
+}
 
 
 /* ==========================================================================

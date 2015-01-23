@@ -52,9 +52,20 @@
     
     
     app.controller("MainController", ["$scope", "$firebase", "$location", "$routeParams", function($scope, $firebase, $location, $routeParams) {
+        
+        
         $scope.isActive = function(route) {
-        return route === $location.path();
-    }
+            return route === $location.path();
+        };
+        
+        $('.main-nav').hover(function() {
+            $('body').addClass("expanded");
+        });
+        
+        $('.main-nav').mouseleave(function() {
+            $('body').removeClass("expanded");
+        });
+        
         $scope.handleFileSelectAdd = function(evt) {
             console.log("starting main controller handle file select");
             var f = evt.target.files[0];
