@@ -143,7 +143,7 @@
             });
         };
         
-        $('.bt-social').on('click', function(e) { 
+        $('.bt-social').unbind().on('click', function(e) { 
             var $currentButton = $(this);
             var provider = $currentButton.data("provider");
             e.preventDefault();
