@@ -1,5 +1,6 @@
 <h1>{{ vehicle.year }} {{ vehicle.make }} {{ vehicle.model }}</h1>
 <img class="car-image-preview" src="{{vehicle.picture}}">
+<h2>Total cost of repairs for this vehicle is {{ vehicle.repairSum }}</h2>
 <h2>Repairs</h2>
 <div ng-repeat="repair in repairlist" class="repair-item"> 
     <ul>

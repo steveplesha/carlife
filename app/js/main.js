@@ -224,8 +224,17 @@
         }
         var repairRef = new Firebase(myDataRef + '/users/' + authData.uid + '/vehicles/' + id + '/repairs/');
         var sync = $firebase(repairRef);
-        repairlist = sync.$asArray();    
-        $scope.repairlist = repairlist;
+        repairlist = sync.$asArray();
+        $scope.repairlist = repairlist;   
+        var repairSum = 0;
+        for (var i= 1; i < 2; i++) {
+            console.log(repairSum);
+            console.log("i: "+i);
+            console.log(repairlist[0]);    
+            cost = Number(repairlist[0].cost);
+            repairSum += cost;
+        }
+        $scope.repairSum = repairSum;
         
         console.log("id is " + id);
         ref.once('value', function(snap) {

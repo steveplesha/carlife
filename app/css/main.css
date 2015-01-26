@@ -104,6 +104,7 @@ ul {
    ========================================================================== */
 body, html { height: 100%; }
 
+body { font-family: 'Josefin Sans', sans-serif; }
 
 main { 
     background-image: /* Apply a bit of white filter to bkg image to aid in button text visibility */
@@ -151,21 +152,6 @@ main {
 }
 
 .expanded .main-nav { width: 200px; }
-
-.bolt {
-    transform: rotate(0deg);
-    transition: 0.2s ease-in-out;
-    width: 20px;
-    height: 20px;
-    top: 3px;
-    right: 3px;
-}
-
-.expanded .bolt {
-    -webkit-transform: rotate(100deg); 
-    transform: rotate(180deg);
-    transition: 0.2s ease-in-out;
-}
 
 .main-nav .nav-image {
     background-image: url("../img/icons.png");
