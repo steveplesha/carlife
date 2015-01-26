@@ -82,6 +82,12 @@ textarea {
     resize: vertical;
 }
 
+ul {
+    -webkit-padding-start: 0;
+    padding: 0;
+    margin: 0;    
+}
+
 /* ==========================================================================
    Browse Happy prompt
    ========================================================================== */
@@ -112,20 +118,15 @@ main {
     color: rgb(255, 255, 255);
 }
 
-.expanded main { 
-    padding-left: 200px; 
-}
-
 .content {
     margin-left: 55px;
-           -moz-transition: width ease-in-out 0.28s, background linear 0.1s;
-    -webkit-transition: width ease-in-out 0.28s, background linear 0.1s;
-         -o-transition: width ease-in-out 0.28s, background linear 0.1s;
-            transition: width ease-in-out 0.28s, background linear 0.1s;
-        -ms-transform: translate(0px, 0);
-       -moz-transform: translate(0px, 0);
-    -webkit-transform: translate3d(0px, 0, 0);
-            transform: translate(0px, 0);
+    transform: translate(0px, 0px);
+    transition: transform 0.28s ease-in-out 0.0s;
+}
+
+.expanded .content { 
+    transform: translate(150px, 0px);
+    transition: transform 0.28s ease-in-out 0.0s;
 }
 
 .main-nav { 
@@ -150,6 +151,21 @@ main {
 }
 
 .expanded .main-nav { width: 200px; }
+
+.bolt {
+    transform: rotate(0deg);
+    transition: 0.2s ease-in-out;
+    width: 20px;
+    height: 20px;
+    top: 3px;
+    right: 3px;
+}
+
+.expanded .bolt {
+    -webkit-transform: rotate(100deg); 
+    transform: rotate(180deg);
+    transition: 0.2s ease-in-out;
+}
 
 .main-nav .nav-image {
     background-image: url("../img/icons.png");
@@ -242,6 +258,16 @@ input[type=file] { background-color: rgb( 255, 255, 255 ); }
     border-radius: 5px;
 }
 
+.repair-item {
+    padding: 20px;
+    margin-right: 20px;
+    margin-bottom: 25px;
+    width: 30%;
+    display: inline-block;
+    background-color: rgba(27, 27, 27, .5);
+    border-radius: 5px;
+}
+
 .car-item-title {
     text-align: center;
 }
@@ -279,7 +305,7 @@ input[type=file] { background-color: rgb( 255, 255, 255 ); }
 }
 
 .delete-button { 
-    margin-top: 5px;
+    margin-top: 15px;
 }
 
 .login-state { 
@@ -326,11 +352,14 @@ input[type=file] { background-color: rgb( 255, 255, 255 ); }
     position: absolute;
     top: 20px;
     left: 38%;
-    background-color: #ff8080;
     border-radius: 4px;
     padding: 10px 100px;
     display: none;
 }
+
+.error-message { background-color: #ed5a5a; }
+    
+.info-message { background-color: #5fcf80;; }
 
 .forgot-password a {
     color: rgb(255, 255, 255);

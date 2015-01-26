@@ -53,7 +53,6 @@
     
     app.controller("MainController", ["$scope", "$firebase", "$location", "$routeParams", function($scope, $firebase, $location, $routeParams) {
         
-        
         $scope.isActive = function(route) {
             return route === $location.path();
         };
@@ -125,7 +124,7 @@
                         $location.path('/');
                     })
                 } else { 
-                    $(".message").show().html(error).fadeOut(5000);
+                    $(".message").addClass("error-message").show().html(error).fadeOut(5000);
                 }
             });
         }; 
@@ -137,8 +136,9 @@
             }, function (error, authData) {
                 if (error === null) {
                     $location.path('/cars');
+                    $(".message").addClass("info-message").show().html("You've successfully logged in").fadeOut(5000);
                 } else {
-                    $(".message").show().html(error).fadeOut(5000);
+                    $(".message").addClass("error-message").show().html(error).fadeOut(5000);
                 }
             });
         };
@@ -156,15 +156,18 @@
             console.log("third party login entered");
             myDataRef.authWithOAuthPopup(provider, function (error, authData) {
                 if (error) {
+                    console.log(error);
                     if (error.code === "TRANSPORT_UNAVAILABLE") {
                         myDataRef.authWithOauthRedirect(provider, function (error, authData) {
-                            $location.path('/cars');
+                            $location.path('#/cars');
+                            $(".message").addClass("info-message").show().html("You've successfully logged in").fadeOut(5000);
                         });
                     }
                 } else {
-                    alert("Error authenticating: ", error);
+                    console.log("error: " + error);
                 }
             });
+            $(".message").addClass("info-message").show().html("You've successfully logged in").fadeOut(5000);
             $location.path('/login');
         };
         
@@ -186,7 +189,7 @@
             $scope.authData = "";
             $('.login-state').html("Not logged in");
             $location.path('/');
-            $(".message").show().html("You are logged out").fadeOut(5000);
+            $(".message").addClass("info-message").show().html("You are logged out").fadeOut(5000);
         };
         
         myDataRef.onAuth(function(authData) {
