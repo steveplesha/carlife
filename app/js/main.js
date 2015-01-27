@@ -96,25 +96,19 @@
                 model: model, 
                 picture: picture
             });
-            console.log("End of addCar function reached");
             $location.path('/cars');
         };
         
         $scope.removeCar = function(car) {
-            console.log("Starting removeCar");
             $scope.carlist.$remove(car);
         };
 
         $scope.register = function() {
-            console.log("Register function entered");
-            console.log("user: " + $scope.emailRegister + " / pw: " + $scope.passwordRegister);
-            
             myDataRef.createUser({
                 email    : $scope.emailRegister,
                 password : $scope.passwordRegister
             }, function(error) {
                 if (error === null) {
-                    console.log("user created successfully"); 
                     myDataRef.authWithPassword({
                         email   : $scope.emailRegister, 
                         password: $scope.passwordRegister
@@ -122,6 +116,7 @@
                         console.log("user id: " + authData.uid + ", Provider: " + authData.provider);
                         myDataRef.child('users').child(authData.uid).set(authData);
                         $location.path('/');
+                        $(".message").addClass("info-message").show().html("You've successfully registered!").fadeOut(5000);
                     })
                 } else { 
                     $(".message").addClass("error-message").show().html(error).fadeOut(5000);
@@ -136,7 +131,7 @@
             }, function (error, authData) {
                 if (error === null) {
                     $location.path('/cars');
-                    $(".message").addClass("info-message").show().html("You've successfully logged in").fadeOut(5000);
+                    $(".message").addClass("info-message").show().html("You've successfully logged in!").fadeOut(5000);
                 } else {
                     $(".message").addClass("error-message").show().html(error).fadeOut(5000);
                 }
@@ -147,7 +142,6 @@
             var $currentButton = $(this);
             var provider = $currentButton.data("provider");
             e.preventDefault();
-            console.log("bt social clicked with provider " + provider);
             
             thirdPartyLogin(provider);
         });
@@ -166,9 +160,8 @@
                 } else {
                     console.log("error: " + error);
                 }
+                $location.path('/cars');
             });
-            $(".message").addClass("info-message").show().html("You've successfully logged in").fadeOut(5000);
-            $location.path('/login');
         };
         
         $scope.pwreset = function() { 
@@ -227,15 +220,15 @@
         repairlist = sync.$asArray();
         $scope.repairlist = repairlist;   
         var repairSum = 0;
-        for (var i= 1; i < 2; i++) {
+        /*for (i=0; i < 2; i += 1) {
             console.log(repairSum);
             console.log("i: "+i);
-            console.log(repairlist[0]);    
-            cost = Number(repairlist[0].cost);
+            console.log(repairlist[i]);    
+            cost = Number(repairlist[i].cost);
             repairSum += cost;
         }
         $scope.repairSum = repairSum;
-        
+        */
         console.log("id is " + id);
         ref.once('value', function(snap) {
             var carlist = snap.val();
