@@ -1,17 +1,24 @@
-<h1>{{ vehicle.year }} {{ vehicle.make }} {{ vehicle.model }}</h1>
-<img class="car-image-preview" src="{{vehicle.picture}}">
-<h2>Total cost of repairs for this vehicle is {{ vehicle.repairSum }}</h2>
-<h2>Repairs</h2>
-<div ng-repeat="repair in repairlist" class="repair-item"> 
-    <ul>
-        <li><h2>{{ repair.work }}</h2></li>
-        <li>Cost: {{ repair.cost | currency }}</li>        
-        <li>Repair Shop: {{ repair.shop }}</li>
-        <li>Date of work: {{ repair.date }}</li>
-        <li>Mileage when work done: {{ repair.mileage }}</li>
-        <li><button type="button" class="btn btn-danger delete-button" ng-click="removeRepair(repair)">Delete this repair</button></li>
-    </ul>
+<div class="container">
+    <h1>{{ vehicle.year }} {{ vehicle.make }} {{ vehicle.model }}</h1>
+    <img class="car-image-preview" src="{{vehicle.picture}}">
+    <h2>Total cost of repairs for this vehicle is {{ repairSum | currency }}</h2>
+    <h2>Repairs</h2>
 </div>
-<div>
+<div class="container-fluid">    
+    <div class="row">
+       <div ng-repeat="repair in repairlist" class="repair-item col-xs-10 col-xs-offset-1 col-sm-3 col-sm-offset-1 col-md-3 col-md-offset-1"> 
+            <ul>
+                <li><h2>{{ repair.work }}</h2></li>
+                <li>Cost: {{ repair.cost | currency }}</li>        
+                <li>Repair Shop: {{ repair.shop }}</li>
+                <li>Date of work: {{ repair.date }}</li>
+                <li>Mileage when work done: {{ repair.mileage }}</li>
+                <li><button type="button" class="btn btn-danger delete-button" ng-click="removeRepair(repair)">Delete this repair</button></li>
+            </ul>
+        </div>
+    </div>
+</div>    
+<div class="container">
     <a href="/addrepair/{{vehicle.$id}}" ><button type="button" class="btn btn-primary">Add a repair</button></a>
 </div>
+

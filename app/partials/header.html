@@ -1,6 +1,6 @@
 <div class="main-nav" ng-controller="MainController">
     <ul class="nav">
-        <li class="menu-label">Menu</li>
+        <li class="menu-label"><span class="glyphicon glyphicon-menu-hamburger"></span> Menu</li>
         <li>
             <a href="/" ng-class="{selected:isActive('/')}">
                 <span>CarLife Home</span>    
@@ -31,6 +31,12 @@
                 <i class="nav-image add-car-icon"></i>
             </a>
         </li>
+        <li>
+            <a href="/maintenance" class="btnMaintenance" ng-class="{selected:isActive('/maintenance')}">
+                <span>Maintenance</span>
+                <i class="nav-image engine-icon"></i>
+            </a>
+        </li>   
         <li ng-show="authData">
             <a href="/" class="btnLogout" ng-click="logout()">
                 <span>Logout</span>

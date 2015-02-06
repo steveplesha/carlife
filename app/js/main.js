@@ -45,6 +45,10 @@
                   templateUrl: 'app/partials/pwreset.html',
                   controller: 'MainController'
               }).
+              when('/maintenance', {
+                  templateUrl: 'app/partials/maintenance.html'
+              
+              }).
               otherwise({
                   redirectTo: 'app/index.html'
               });
@@ -57,7 +61,7 @@
             return route === $location.path();
         };
         
-        $('.main-nav').hover(function() {
+        $('.main-nav').mouseenter(function() {
             $('body').addClass("expanded");
         });
         
@@ -65,18 +69,23 @@
             $('body').removeClass("expanded");
         });
         
+        var displayMsg = function(msgClass, message) {
+            $('.message').addClass(msgClass).show().html(message).fadeOut(5000);
+        };
+        
+        var picture = "app/img/default-vehicle.png";
+        
         $scope.handleFileSelectAdd = function(evt) {
-            console.log("starting main controller handle file select");
             var f = evt.target.files[0];
             var reader = new FileReader();
             reader.onload = (function(theFile) {
                 return function(e) {
                     var filePayload = e.target.result;
                     picture = e.target.result;
-                    document.getElementById('pano').src = $scope.picture;
+                    document.getElementById('pano').src = picture;
                 };
             })(f);
-        reader.readAsDataURL(f);
+            reader.readAsDataURL(f);
         };  
 
         var uploadEl = document.getElementById('file-upload');
@@ -88,7 +97,6 @@
             var authData = myDataRef.getAuth();
             var currentUserRef = myDataRef.child('users').child(authData.uid);
             var spinner = new Spinner({color: '#ddd'});
-            picture = "app/img/default-vehicle.png";       
 
             currentUserRef.child('vehicles').push({
                 year: year, 
@@ -97,31 +105,37 @@
                 picture: picture
             });
             $location.path('/cars');
+            displayMsg("info-message", "Car has been added");
         };
         
         $scope.removeCar = function(car) {
             $scope.carlist.$remove(car);
+            displayMsg("info-message","Car has been removed");
         };
 
         $scope.register = function() {
-            myDataRef.createUser({
-                email    : $scope.emailRegister,
-                password : $scope.passwordRegister
-            }, function(error) {
-                if (error === null) {
-                    myDataRef.authWithPassword({
-                        email   : $scope.emailRegister, 
-                        password: $scope.passwordRegister
-                    }, function ( error, authData) {
-                        console.log("user id: " + authData.uid + ", Provider: " + authData.provider);
-                        myDataRef.child('users').child(authData.uid).set(authData);
-                        $location.path('/');
-                        $(".message").addClass("info-message").show().html("You've successfully registered!").fadeOut(5000);
-                    })
-                } else { 
-                    $(".message").addClass("error-message").show().html(error).fadeOut(5000);
-                }
-            });
+            if ($scope.passwordRegister === $scope.passwordConfirm) {
+                myDataRef.createUser({
+                    email    : $scope.emailRegister,
+                    password : $scope.passwordRegister
+                }, function(error) {
+                    if (error === null) {
+                        myDataRef.authWithPassword({
+                            email   : $scope.emailRegister, 
+                            password: $scope.passwordRegister
+                        }, function ( error, authData) {
+                            console.log("user id: " + authData.uid + ", Provider: " + authData.provider);
+                            myDataRef.child('users').child(authData.uid).set(authData);
+                            $location.path('/');
+                            displayMsg("info-message","You've successfully registered!");
+                        })
+                    } else { 
+                        displayMsg("error-message", error);
+                    }
+                });
+            } else {
+                displayMsg("error-message", "The passwords entered don't match");
+            }
         }; 
         
         $scope.login = function () {
@@ -131,9 +145,9 @@
             }, function (error, authData) {
                 if (error === null) {
                     $location.path('/cars');
-                    $(".message").addClass("info-message").show().html("You've successfully logged in!").fadeOut(5000);
+                    displayMsg("info-message","You've successfully logged in!");
                 } else {
-                    $(".message").addClass("error-message").show().html(error).fadeOut(5000);
+                    displayMsg("error-message",error);
                 }
             });
         };
@@ -154,13 +168,14 @@
                     if (error.code === "TRANSPORT_UNAVAILABLE") {
                         myDataRef.authWithOauthRedirect(provider, function (error, authData) {
                             $location.path('#/cars');
-                            $(".message").addClass("info-message").show().html("You've successfully logged in").fadeOut(5000);
+                            displayMsg("info-message","You've successfully logged in");
                         });
                     }
                 } else {
-                    console.log("error: " + error);
+                    displayMsg("error-message",error);
                 }
                 $location.path('/cars');
+                displayMsg("info-message","You've successfully logged in!");
             });
         };
         
@@ -169,9 +184,9 @@
                 email: $scope.resetEmail
             }, function(error) {
                 if (error === null) {
-                    console.log("Password reset email sent successfully");
+                    displayMsg("info-message","Password reset email sent successfully");
                 } else {
-                    console.log("Error sending password reset email: ", error);
+                    displayMsg("error-message",error);
                 }
             });
         };
@@ -182,7 +197,7 @@
             $scope.authData = "";
             $('.login-state').html("Not logged in");
             $location.path('/');
-            $(".message").addClass("info-message").show().html("You are logged out").fadeOut(5000);
+            displayMsg("info-message","You are logged out");
         };
         
         myDataRef.onAuth(function(authData) {
@@ -194,7 +209,6 @@
                 var userVehicleRef = new Firebase(myDataRef + '/users/' + authData.uid + '/vehicles');
                 var sync = $firebase(userVehicleRef);
                 carlist = sync.$asArray();
-
                 $scope.carlist = carlist;
             } else {
                 $('.loginState').html("Not Logged In");
@@ -204,40 +218,40 @@
     }]);
     
     app.controller("EditCarController", ["$scope", "$firebase", "$location", "$routeParams", function($scope, $firebase, $location, $routeParams) {
-        console.log("starting edit controller");
         var authData = myDataRef.getAuth();
-        var ref = new Firebase(myDataRef + '/users/' + authData.uid + '/vehicles');
+        var ref = new Firebase(myDataRef + '/users/' + authData.uid + '/vehicles');     
         var vehicleRef = myDataRef.child('users').child(authData.uid).child('vehicles')
-        var sync = $firebase(ref);
         var id = $routeParams.id;
-        var spinner = new Spinner({color: '#ddd'});
+        var spinner = new Spinner({color: '#6a6a6a'});
+        
+        var displayMsg = function(msgClass, message) {
+            $('.message').addClass(msgClass).show().html(message).fadeOut(5000);
+        };
               
         $scope.isActive = function(route) {
             return route === $location.path();
         }
-        var repairRef = new Firebase(myDataRef + '/users/' + authData.uid + '/vehicles/' + id + '/repairs/');
-        var sync = $firebase(repairRef);
-        repairlist = sync.$asArray();
-        $scope.repairlist = repairlist;   
-        var repairSum = 0;
-        /*for (i=0; i < 2; i += 1) {
-            console.log(repairSum);
-            console.log("i: "+i);
-            console.log(repairlist[i]);    
-            cost = Number(repairlist[i].cost);
-            repairSum += cost;
-        }
-        $scope.repairSum = repairSum;
-        */
-        console.log("id is " + id);
+        
         ref.once('value', function(snap) {
             var carlist = snap.val();
         });
-        $scope.vehicle = carlist.$getRecord($routeParams.id);
+        
+        var repairRef = new Firebase(myDataRef + '/users/' + authData.uid + '/vehicles/' + id + '/repairs/');
+        var sync = $firebase(repairRef);
+        var repairlist = sync.$asArray();
+        var repairSum = 0;
+        repairlist.$loaded().then(function(){   
+            $scope.repairlist = repairlist;   
+            for (var i=0; i < repairlist.length; i += 1) {
+                repairSum += Number(repairlist[i].cost);
+            }
+            $scope.repairSum = repairSum;
+        });
+        
+        $scope.vehicle = carlist.$getRecord(id);
         var picture = $scope.vehicle.picture;
         
-        $scope.handleFileSelectAdd = function(evt) {
-            console.log("starting edit car controller handle file select");            
+        $scope.handleFileSelectAdd = function(evt) {        
             var f = evt.target.files[0];
             var reader = new FileReader();
             reader.onload = (function(theFile) {
@@ -253,6 +267,7 @@
         };
         
         var uploadEl = document.getElementById('file-upload');
+        
         if(uploadEl) {
             uploadEl.addEventListener('change', $scope.handleFileSelectAdd, false);
         }
@@ -263,6 +278,7 @@
             console.log("scope pic: " + $scope.picture);
             vehicleRef.child(id).update({year: year, make: make, model: model, picture: picture});
             $location.path('/cars');
+            displayMsg("info-message","Your vehicle has been updated");
         };
 		
         $scope.addRepair = function(work, cost, shop, date, mileage) {
@@ -274,11 +290,13 @@
                 mileage: $scope.mileage,                
             });
             $location.path('/repairs/' + id);
+            displayMsg("info-message","Repair has been added");
         };
         
         $scope.removeRepair = function(repair) {
-            console.log("Starting removeRepair");
-            $scope.repairlist.$remove(repair);     
+            $scope.repairSum -= repair.cost;
+            $scope.repairlist.$remove(repair); 
+            displayMsg("info-message","Repair has been deleted");
         };
         
         

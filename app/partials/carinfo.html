@@ -1,21 +1,23 @@
-<div class="carlist">
-    <div class="car-item" ng-repeat="car in carlist" ng-animate="{enter: 'animate-enter', leave: 'animate-leave'}"> 
-        <h1 class="car-item-title">{{ car.year }} {{ car.make }} {{ car.model }}</h1>
-        <img class="car-image" ng-src="{{ car.picture }}"/>    
-        <div class="dropdown">
-           <button class="dropdown btn btn-car-item" type="button" data-toggle="dropdown" href="#">Actions <span class="caret"></span></button>
-               <ul class="dropdown-menu">
-                   <li>
-                       <a href='/editcar/{{car.$id}}'>Edit Car Info/Picture</a>
-                    </li>
-                   <li>
-                       <a href="/repairs/{{car.$id}}" >Show Repairs List</a>
-                   </li>          
-                   <li>
-                       <a href='#' class="delete-link" ng-click="removeCar(car)">Delete This Car</a>
-                   </li>
-               </ul>
-           </button>
+<div class="container-fluid">
+   <div class="carlist row">
+        <div class="car-item col-xs-10 col-xs-offset-1 col-sm-4 col-sm-offset-1 col-md-4 col-md-offset-1" ng-repeat="car in carlist"> 
+            <h1 class="car-item-title">{{ car.year }} {{ car.make }} {{ car.model }}</h1>
+            <img class="car-image" ng-src="{{ car.picture }}"/>    
+            <div class="dropdown">
+               <button class="dropdown btn btn-car-item" type="button" data-toggle="dropdown" href="#">Menu <span class="caret"></span></button>
+                   <ul class="dropdown-menu">
+                       <li>
+                           <a href='/editcar/{{car.$id}}'>Edit Car Info/Picture</a>
+                        </li>
+                       <li>
+                           <a href="/repairs/{{car.$id}}" >Show Repairs List</a>
+                       </li>          
+                       <li>
+                           <a href='#' class="delete-link" ng-click="removeCar(car)">Delete This Car</a>
+                       </li>
+                   </ul>
+               </button>
+            </div>
         </div>
     </div>
 </div>
