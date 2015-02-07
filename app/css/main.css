@@ -336,7 +336,7 @@ input[type=file] { background-color: rgb( 255, 255, 255 ); }
 footer {
     background-color: rgba(26, 26, 26, 1);
     color: rgb( 255, 255, 255 );   
-    padding: 10px 0 10px 183px;
+    padding: 10px 0 10px 10px;
 }
 
 @media screen and (min-width: 768px) {
@@ -383,6 +383,8 @@ footer {
     }
     
     .center-form { width: 50%; }
+    
+    footer { padding-left: 183px; }
 }
 
 

@@ -167,7 +167,7 @@
                     console.log(error);
                     if (error.code === "TRANSPORT_UNAVAILABLE") {
                         myDataRef.authWithOauthRedirect(provider, function (error, authData) {
-                            $location.path('#/cars');
+                            $location.path('/cars');
                             displayMsg("info-message","You've successfully logged in");
                         });
                     }
