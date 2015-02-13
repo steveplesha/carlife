@@ -211,17 +211,41 @@ li { list-style: none; }
 
 input[type=file] { background-color: rgb( 255, 255, 255 ); }
 
+.carousel {
+    padding-top: 10px;
+    padding-bottom: 50px;
+    background-color: rgba(27, 27, 27, .5);
+}
+
+.carousel-inner>.item {
+    padding-bottom: 60px;
+}
+
+.carousel-image {
+    height: 50%;
+    display: block;
+    margin: 0 auto;
+    border: 2px solid rgb(255, 255, 255);r
+}
+
+.carousel-caption {
+    bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
 .btn-margin { margin-right: 10px; }
 
 .car-item {
-    padding: 20px;
+    padding: 19px;
     margin-bottom: 25px;
     display: inline-block;
     background-color: rgba(27, 27, 27, .5);
+    border: 1px solid rgb(27, 27, 27);
     border-radius: 5px;
 }
 
-
+.car-item:hover { border: 1px solid rgb(255, 255, 255); }
 
 .dropdown-menu { left: 26%; }
 

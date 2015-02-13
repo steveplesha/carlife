@@ -240,6 +240,7 @@
         var sync = $firebase(repairRef);
         var repairlist = sync.$asArray();
         var repairSum = 0;
+        
         repairlist.$loaded().then(function(){   
             $scope.repairlist = repairlist;   
             for (var i=0; i < repairlist.length; i += 1) {
@@ -281,16 +282,20 @@
             displayMsg("info-message","Your vehicle has been updated");
         };
 		
-        $scope.addRepair = function(work, cost, shop, date, mileage) {
-            vehicleRef.child(id).child('repairs').push({
-                work: $scope.work,
-                cost: $scope.cost,
-                shop: $scope.shop,
-                date: $scope.date,
-                mileage: $scope.mileage,                
-            });
+        $scope.addRepair = function(work, cost, shop, date, mileage, error) {
+            if(error === null) { 
+                vehicleRef.child(id).child('repairs').push({
+                    work: $scope.work,
+                    cost: $scope.cost,
+                    shop: $scope.shop,
+                    date: $scope.date,
+                    mileage: $scope.mileage
+                });
             $location.path('/repairs/' + id);
             displayMsg("info-message","Repair has been added");
+            } else {
+                displayMsg("error-message","Please fill out all fields");
+            }
         };
         
         $scope.removeRepair = function(repair) {
