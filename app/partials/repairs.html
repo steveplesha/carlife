@@ -1,8 +1,7 @@
 <div class="container">
-    <h1>{{ vehicle.year }} {{ vehicle.make }} {{ vehicle.model }}</h1>
+    <h1>Repairs for {{ vehicle.year }} {{ vehicle.make }} {{ vehicle.model }}</h1>
     <img class="car-image-preview" src="{{vehicle.picture}}">
     <h2>Total cost of repairs for this vehicle is {{ repairSum | currency }}</h2>
-    <h2>Repairs</h2>
 </div>
 <div class="container-fluid">    
     <div class="row">

@@ -32,13 +32,19 @@
             </a>
         </li>
         <li>
-            <a href="/maintenance" class="btnMaintenance" ng-class="{selected:isActive('/maintenance')}">
+            <a href="/maintenance"  ng-class="{selected:isActive('/maintenance')}">
                 <span>Maintenance</span>
                 <i class="nav-image engine-icon"></i>
             </a>
         </li>   
         <li ng-show="authData">
-            <a href="/" class="btnLogout" ng-click="logout()">
+            <a href="/profile" ng-class="{selected:isActive('/profile')}">
+                <span>Your Profile</span>
+                <i class="nav-image profile-icon"></i>
+            </a>
+        </li>        
+        <li ng-show="authData">
+            <a href="/" ng-click="logout()">
                 <span>Logout</span>
                 <i class="nav-image logout-icon"></i>
             </a>

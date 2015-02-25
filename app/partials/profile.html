@@ -1,0 +1,22 @@
+<div class="container center-form">
+    <h2>Change Your Password</h2>
+    <form id="changePswd" class="profile-form" ng-controller="MainController" ng-submit="changePswd()">
+        <div class="form-group">
+            <label for="email">Your Email Address</label>
+            <input type="email" class="form-control" id="passwordEmail" ng-model="passwordEmail" placeholder="enter email address" name="passwordEmail" />
+        </div>    
+        <div class="form-group">
+            <label for="oldPassword">Old Password</label>
+            <input type="password" class="form-control" id="oldPassword" ng-model="oldPassword" placeholder="enter old password" name="oldPassword" />
+        </div>       
+        <div class="form-group">
+            <label for="passwordInput">Password</label>
+            <input type="password" class="form-control" id="password" ng-model="newPassword" placeholder="enter new password" name="newPassword" />
+        </div>
+        <div class="form-group">
+            <label for="passwordConfirm">Confirm Password</label>
+            <input type="password" class="form-control" id="passwordConfirm" ng-model="newPasswordConfirm" placeholder="re-enter new password" name="newPasswordConfirm" />
+        </div> 
+        <button type="submit" class="btn btn-primary">Update</button>               
+    </form>
+</div>

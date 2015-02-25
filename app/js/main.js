@@ -21,6 +21,14 @@
                   templateUrl: 'app/partials/register.html',
                   controller: 'MainController'
               }).
+              when('/login', {
+                  templateUrl: 'app/partials/login.html',
+                  controller: 'MainController'
+              }).
+              when('/profile', {
+                  templateUrl: 'app/partials/profile.html',
+                  controller: 'MainController'
+              }).            
               when('/addcar', {
                   templateUrl: 'app/partials/addcar.html',
                   controller: 'MainController'
@@ -28,10 +36,6 @@
               when('/editcar/:id', {
                   templateUrl: 'app/partials/editcar.html',
                   controller: 'EditCarController'
-              }).
-              when('/login', {
-                  templateUrl: 'app/partials/login.html',
-                  controller: 'MainController'
               }).
               when('/repairs/:id', {
                   templateUrl: 'app/partials/repairs.html',
@@ -67,6 +71,10 @@
         
         $('.main-nav').mouseleave(function() {
             $('body').removeClass("expanded");
+        });
+        
+        $('.show-form').click(function() {
+            $('.profile-form').removeClass("hidden");
         });
         
         var displayMsg = function(msgClass, message) {
@@ -138,6 +146,60 @@
             }
         }; 
         
+        $scope.emailChange = function() {
+            myDataRef.changeEmail({
+                oldEmail: $scope.oldEmail,
+                newEmail: $scope.email,
+                password: $scope.emailPassword
+            }, function(error) {
+                if (error) {
+                    switch (error.code) {
+                            case "INVALID_PASSWORD":
+                                displayMsg("error-message","The password is incorrect");
+                                break;
+                            case "INVALID_USER":
+                                displayMsg("error-message","The specified email is incorrect");
+                                break;
+                            default:
+                                displayMsg("error-message", error);
+                    }
+                } else {
+                    $location.path('/cars');
+                    displayMsg("info-message","You've successfully changed your password!");
+                }
+            }
+        )};
+        
+        $scope.changePswd = function() {
+            myDataRef.changePassword({
+                email: $scope.passwordEmail,
+                oldPassword: $scope.oldPassword,
+                newPassword: $scope.newPassword
+            }, function(error){
+                if ($scope.newPassword === $scope.newPasswordConfirm) {
+                    if (error) {
+                        switch (error.code) {
+                            case "INVALID_PASSWORD":
+                                displayMsg("error-message","The password is incorrect");
+                                break;
+                            case "INVALID_USER":
+                                displayMsg("error-message","The specified email is incorrect");
+                                break;
+                            default:
+                                displayMsg("error-message", error);
+                        }
+                    } else {
+                        $location.path('/cars');
+                        displayMsg("info-message","Your password has been updated!");
+                    }
+                } else {
+                    displayMsg("error-message","The passwords entered do not match");
+                }
+            }
+        )};
+                
+
+        
         $scope.login = function () {
             myDataRef.authWithPassword({
                 email    : $scope.emailLogin,
@@ -184,6 +246,7 @@
                 email: $scope.resetEmail
             }, function(error) {
                 if (error === null) {
+                    $location.path('/profile');
                     displayMsg("info-message","Password reset email sent successfully");
                 } else {
                     displayMsg("error-message",error);
