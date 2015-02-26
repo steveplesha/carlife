@@ -1,4 +1,20 @@
 <div class="container center-form">
+    <h2>Change your email address</h2>
+    <form id="changeEmail" class="profile-form" ng-controller="MainController" ng-submit="emailChange()">
+        <div class="form-group">
+            <label for="email">Your Current Email Address</label>
+            <input type="email" class="form-control" id="email" ng-model="email" placeholder="enter email address" name="email" />
+        </div>
+        <div class="form-group">
+            <label for="emailConfirm">Your New Email Address</label>
+            <input type="email" class="form-control" id="newEmail" ng-model="newEmail" placeholder="enter new email address" name="newEmail" />
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" ng-model="emailPassword" placeholder="enter password" name="password" />
+        </div>    
+        <button type="submit" class="btn btn-primary">Update</button>        
+    </form>
     <h2>Change Your Password</h2>
     <form id="changePswd" class="profile-form" ng-controller="MainController" ng-submit="changePswd()">
         <div class="form-group">
