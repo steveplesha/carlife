@@ -1,55 +1,117 @@
-<div class="main-nav" ng-controller="MainController">
-    <ul class="nav">
-        <li class="menu-label"><span class="glyphicon glyphicon-menu-hamburger"></span> Menu</li>
-        <li>
-            <a href="/" ng-class="{selected:isActive('/')}">
-                <span>CarLife Home</span>    
-                <i class="nav-image home-icon"></i>
-            </a>
-        </li>
-        <li ng-show="authData" ng-class="{selected:isActive('/cars')}">
-            <a href="/cars">
-                <span>Your Cars</span>
-                <i class="nav-image car-icon"></i>
-            </a>
-        </li>
-        <li ng-hide="authData" ng-class="{selected:isActive('/login')}">
-            <a href="/login">
-                <span>Login</span>
-                <i class="nav-image login-icon"></i>
-            </a>
-        </li>
-        <li ng-hide="authData" ng-class="{selected:isActive('/register')}">
-            <a href="/register">
-                <span>Register</span>
-                <i class="nav-image register-icon"></i>
-            </a>
-        </li>
-        <li ng-show="authData" ng-class="{selected:isActive('/addcar')}">
-            <a href="/addcar">
-                <span>Add Car</span>
-                <i class="nav-image add-car-icon"></i>
-            </a>
-        </li>
-        <li>
-            <a href="/maintenance"  ng-class="{selected:isActive('/maintenance')}">
-                <span>Maintenance</span>
-                <i class="nav-image engine-icon"></i>
-            </a>
-        </li>   
-        <li ng-show="authData">
-            <a href="/profile" ng-class="{selected:isActive('/profile')}">
-                <span>Your Profile</span>
-                <i class="nav-image profile-icon"></i>
-            </a>
-        </li>        
-        <li ng-show="authData">
-            <a href="/" ng-click="logout()">
-                <span>Logout</span>
-                <i class="nav-image logout-icon"></i>
-            </a>
-        </li>
-    </ul>
+<div class="hidden-sm hidden-md hidden-lg">
+    <div class="main-nav" ng-controller="MainController">
+        <ul class="nav">
+            <li class="menu-label">
+                <span class="glyphicon glyphicon-menu-hamburger"></span> Menu
+            </li>
+            <ul class="main-nav-toggle">
+                <li>
+                    <a href="/" ng-class="{selected:isActive('/')}">
+                        <span>CarLife Home</span>    
+                        <i class="nav-image home-icon"></i>
+                    </a>
+                </li>
+                <li ng-show="authData" ng-class="{selected:isActive('/cars')}">
+                    <a href="/cars">
+                        <span>Your Cars</span>
+                        <i class="nav-image car-icon"></i>
+                    </a>
+                </li>
+                <li ng-hide="authData" ng-class="{selected:isActive('/login')}">
+                    <a href="/login">
+                        <span>Login</span>
+                        <i class="nav-image login-icon"></i>
+                    </a>
+                </li>
+                <li ng-hide="authData" ng-class="{selected:isActive('/register')}">
+                    <a href="/register">
+                        <span>Register</span>
+                        <i class="nav-image register-icon"></i>
+                    </a>
+                </li>
+                <li ng-show="authData" ng-class="{selected:isActive('/addcar')}">
+                    <a href="/addcar">
+                        <span>Add Car</span>
+                        <i class="nav-image add-car-icon"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="/maintenance"  ng-class="{selected:isActive('/maintenance')}">
+                        <span>Maintenance</span>
+                        <i class="nav-image engine-icon"></i>
+                    </a>
+                </li>   
+                <li ng-show="authData">
+                    <a href="/profile" ng-class="{selected:isActive('/profile')}">
+                        <span>Your Profile</span>
+                        <i class="nav-image profile-icon"></i>
+                    </a>
+                </li>        
+                <li ng-show="authData">
+                    <a href="/" ng-click="logout()">
+                        <span>Logout</span>
+                        <i class="nav-image logout-icon"></i>
+                    </a>
+                </li>
+            </ul>
+        </ul>
+    </div>
+    <div class="pull-right login-state"><span>Not logged in</span></div>
 </div>
-<div class="pull-right login-state"><span>Not logged in</span></div>
 
+<div class="hidden-xs">
+    <div class="main-nav" ng-controller="MainController">
+        <ul class="nav">
+            <li class="menu-label"><span class="glyphicon glyphicon-menu-hamburger"></span> Menu</li>
+            <li>
+                <a href="/" ng-class="{selected:isActive('/')}">
+                    <span>CarLife Home</span>    
+                    <i class="nav-image home-icon"></i>
+                </a>
+            </li>
+            <li ng-show="authData" ng-class="{selected:isActive('/cars')}">
+                <a href="/cars">
+                    <span>Your Cars</span>
+                    <i class="nav-image car-icon"></i>
+                </a>
+            </li>
+            <li ng-hide="authData" ng-class="{selected:isActive('/login')}">
+                <a href="/login">
+                    <span>Login</span>
+                    <i class="nav-image login-icon"></i>
+                </a>
+            </li>
+            <li ng-hide="authData" ng-class="{selected:isActive('/register')}">
+                <a href="/register">
+                    <span>Register</span>
+                    <i class="nav-image register-icon"></i>
+                </a>
+            </li>
+            <li ng-show="authData" ng-class="{selected:isActive('/addcar')}">
+                <a href="/addcar">
+                    <span>Add Car</span>
+                    <i class="nav-image add-car-icon"></i>
+                </a>
+            </li>
+            <li>
+                <a href="/maintenance"  ng-class="{selected:isActive('/maintenance')}">
+                    <span>Maintenance</span>
+                    <i class="nav-image engine-icon"></i>
+                </a>
+            </li>   
+            <li ng-show="authData">
+                <a href="/profile" ng-class="{selected:isActive('/profile')}">
+                    <span>Your Profile</span>
+                    <i class="nav-image profile-icon"></i>
+                </a>
+            </li>        
+            <li ng-show="authData">
+                <a href="/" ng-click="logout()">
+                    <span>Logout</span>
+                    <i class="nav-image logout-icon"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="pull-right login-state"><span>Not logged in</span></div>
+</div>

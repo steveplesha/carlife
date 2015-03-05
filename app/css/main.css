@@ -135,6 +135,20 @@ main {
     opacity: 1.0;
 }
 
+.main-nav-toggle {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s;
+}
+
+.expanded .main-nav-toggle {
+    height:100%;
+    max-height: 144px;
+    transition: max-height 0.2s;
+}
+
+.btn { width: 100%; }
+
 .home-icon { background-position: 0 -40px; }
 .selected .home-icon { background-position: -40px -40px; }
 
@@ -177,7 +191,7 @@ main {
 li { list-style: none; }
 
 .menu-label {
-    text-align: left;
+    text-align: center;
     color: rgb(170, 170, 170);
     padding-left: 1px;
 }
@@ -369,7 +383,7 @@ footer {
 @media screen and (min-width: 768px) {
     
     .main-nav {
-        width: 53px;
+        width: 58px;
         position: fixed;
         left: 0;
         top: 0;
@@ -395,6 +409,10 @@ footer {
         padding-left: 55px; 
         line-height: 44px;
     }
+    
+    .menu-label { text-align: left; }
+    
+    .btn { width: initial; }
     
     .expanded .main-nav { width: 200px; }
     
