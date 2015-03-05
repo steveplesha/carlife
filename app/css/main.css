@@ -143,7 +143,7 @@ main {
 
 .expanded .main-nav-toggle {
     height:100%;
-    max-height: 144px;
+    max-height: 228px;
     transition: max-height 0.2s;
 }
 
@@ -186,6 +186,8 @@ main {
   font-weight: 300;
   color: #aaaaaa;
   border-top: 1px #2d2d2d solid;
+  padding-top: 7px;
+  padding-bottom: 7px;
 }
 
 li { list-style: none; }
@@ -193,7 +195,8 @@ li { list-style: none; }
 .menu-label {
     text-align: center;
     color: rgb(170, 170, 170);
-    padding-left: 1px;
+    padding-top: 5px;
+    padding-bottom: 5px;    
 }
 
 .main-nav ul .selected { background-color: rgb(170, 170, 170); }
@@ -291,7 +294,6 @@ input[type=file] { background-color: rgb( 255, 255, 255 ); }
     font-weight: bold;
     font-size: 12px;
     padding: 10px 25px;
-    margin-left: 33%;
 }
 
 .btn-car-item:hover,
@@ -410,9 +412,14 @@ footer {
         line-height: 44px;
     }
     
-    .menu-label { text-align: left; }
+    .menu-label { 
+        text-align: left; 
+        padding-left: 1px;
+    }
     
     .btn { width: initial; }
+    
+    .btn-car-item { margin-left: 33%; }
     
     .expanded .main-nav { width: 200px; }
     

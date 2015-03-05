@@ -149,7 +149,7 @@
         $scope.emailChange = function() {
             myDataRef.changeEmail({
                 oldEmail: $scope.oldEmail,
-                newEmail: $scope.email,
+                newEmail: $scope.newEmail,
                 password: $scope.emailPassword
             }, function(error) {
                 if (error) {
@@ -165,7 +165,7 @@
                     }
                 } else {
                     $location.path('/cars');
-                    displayMsg("info-message","You've successfully changed your password!");
+                    displayMsg("info-message","You've successfully changed your email address!");
                 }
             }
         )};
@@ -226,9 +226,9 @@
             console.log("third party login entered");
             myDataRef.authWithOAuthPopup(provider, function (error, authData) {
                 if (error) {
-                    console.log(error);
+                    displayMsg("error-message",error);
                     if (error.code === "TRANSPORT_UNAVAILABLE") {
-                        myDataRef.authWithOauthRedirect(provider, function (error, authData) {
+                        myDataRef.authWithOAuthRedirect(provider, function (error, authData) {
                             $location.path('/cars');
                             displayMsg("info-message","You've successfully logged in");
                         });
